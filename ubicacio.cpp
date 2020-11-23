@@ -12,9 +12,9 @@ ubicacio::ubicacio(int i, int j, int k) throw(error) {
 
 /* Constructora per còpia, assignació i destructora. */
 ubicacio::ubicacio(const ubicacio& u) throw(error) {
-    fila = u.fila;
-    plaza = u.plaza;
-    piso = u.piso;
+    this->fila = u.fila;
+    this->plaza = u.plaza;
+    this->piso = u.piso;
 }
 
 ubicacio& ubicacio::operator=(const ubicacio& u) throw(error) {
@@ -31,15 +31,15 @@ ubicacio::~ubicacio() throw() {}
 /* Consultors. Retornen respectivament el primer, segon i tercer
    component de la ubicació. */
 int ubicacio::filera() const throw() {
-    return fila;
+    return this->fila;
 }
 
 int ubicacio::placa() const throw() {
-    return plaza;
+    return this->plaza;
 }
 
 int ubicacio::pis() const throw() {
-    return piso;
+    return this->piso;
 }
 
 /* Operadors de comparació.
@@ -51,11 +51,11 @@ int ubicacio::pis() const throw() {
    coincideixen i el pis del paràmetre implícit és més petit que el d'u.
    La resta d'operadors es defineixen consistentment respecte <. */
 bool ubicacio::operator == (const ubicacio & u) const throw() {
-    return fila == u.fila && plaza == u.plaza && piso == u.piso;
+    return this->ila == u.fila && this->plaza == u.plaza && this->piso == u.piso;
 }
 
 bool ubicacio::operator != (const ubicacio & u) const throw() {
-    return fila != u.fila || plaza != u.plaza || piso != u.piso;
+    return this->fila != u.fila || this->plaza != u.plaza || this->piso != u.piso;
 }
 
 bool ubicacio::operator < (const ubicacio & u) const throw() {
@@ -63,7 +63,7 @@ bool ubicacio::operator < (const ubicacio & u) const throw() {
     else if (this->fila == u.fila) {
         if (this->plaza < u.plaza) return true;
         else if (this->plaza == u.plaza) {
-            if (piso < u.piso) return true;
+            if (this->piso < u.piso) return true;
             else return false;
         }
         else return false;
