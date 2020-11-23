@@ -1,0 +1,10 @@
+//atributs
+int fila; //Indica la filera on es situa el nostre contenidor
+int plaza; //Indica la plaça on es situa el nostre contenidor
+int piso; //Indica el pis on es situa el nostre contenidor
+
+//mètodes privats
+
+//Pre: cert
+//Post: retorna true si, <i, j, k> no pertany a {<u, v, w> | u >= 0 ^ v >= 0 ^ w >= 0} o a {<-1, 0, 0>,  <-1,-1,-1>}, altrament retorna false
+bool es_error(int i, int j, int k);
