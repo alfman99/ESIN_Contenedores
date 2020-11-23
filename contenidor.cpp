@@ -6,8 +6,8 @@
     formada exclusivament per lletres majúscules i dígits,
     o si l no pertany a {10, 20, 30} */
 contenidor::contenidor(const string &m, nat l) throw(error){
-    matri = m;
-    longi = l;
+    this->matri = m;
+    this->longi = l;
     if (this->es_error(m, l)) {
         throw error(MatriculaIncorrecta);
     }
@@ -15,14 +15,14 @@ contenidor::contenidor(const string &m, nat l) throw(error){
 
 /* Constructora per còpia, assignació i destructora. */
 contenidor::contenidor(const contenidor &u) throw(error){
-    matri = u.matri;
-    longi = u.longi;
+    this->matri = u.matri;
+    this->longi = u.longi;
 }
 
 contenidor& contenidor::operator=(const contenidor &u) throw(error){
     if(this != &u){
-        matri = u.matri;
-        longi = u.longi;
+        this->matri = u.matri;
+        this->longi = u.longi;
     }
     return *this;
 }
@@ -32,11 +32,11 @@ contenidor::~contenidor() throw() {}
 /* Consultors. Retornen respectivament la longitud i la matrícula del
     contenidor. */
 nat contenidor::longitud() const throw(){
-    return longi;
+    return this->longi;
 }
 
 string contenidor::matricula() const throw(){
-    return matri;
+    return this->matri;
 }
 
 /* Operadors de comparació. L'operador d'igualtat retorna cert si i
@@ -48,11 +48,11 @@ string contenidor::matricula() const throw(){
     respecte a <. */
 
 bool contenidor::operator==(const contenidor &c) const throw(){
-    return matri == c.matri && longi == c.longi;
+    return this->matri == c.matri && this->longi == c.longi;
 }
 
 bool contenidor::operator!=(const contenidor &c) const throw(){
-    return matri != c.matri || longi != c.longi;
+    return this->matri != c.matri || this->longi != c.longi;
 }
 
 bool contenidor::operator<(const contenidor &c) const throw(){
