@@ -1,0 +1,14 @@
+
+struct NodeBST {
+    NodeBST* left;
+    NodeBST* right;
+    string key;
+    Valor value;
+}
+
+NodeBST* _root;
+int _size;
+
+cataleg<Valor>* cataleg<Valor>::copia_nodes(NodeBST* node);
+void cataleg<Valor>::delete_nodes(NodeBST* node);
+
