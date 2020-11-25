@@ -12,3 +12,5 @@ int _size;
 cataleg<Valor>* cataleg<Valor>::copia_nodes(NodeBST* node);
 void cataleg<Valor>::delete_nodes(NodeBST* node);
 
+bool exists (NodeBST* node, const string &k);
+void insert (NodeBST* node, const string &k, const Valor &v);

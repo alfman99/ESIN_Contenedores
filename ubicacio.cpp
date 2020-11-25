@@ -2,11 +2,13 @@
 #include "ubicacio.rep"
 
 ubicacio::ubicacio(int i, int j, int k) throw(error) {
-    this->fila = i;
-    this->plaza = j;
-    this->piso = k;
     if (es_error(i, j, k)) {
         throw error(UbicacioIncorrecta);
+    }
+    else{//si no hay error guardamos 
+    this->fila = i;
+    this->plaza = j;
+    this->piso = k;        
     }
 }
 

@@ -6,10 +6,12 @@
     formada exclusivament per lletres majúscules i dígits,
     o si l no pertany a {10, 20, 30} */
 contenidor::contenidor(const string &m, nat l) throw(error){
-    this->matri = m;
-    this->longi = l;
     if (this->es_error(m, l)) {
         throw error(MatriculaIncorrecta);
+    }
+    else{//si no hay error guardamos 
+        this->matri = m;
+        this->longi = l;
     }
 }
 

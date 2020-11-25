@@ -32,7 +32,8 @@ cataleg<Valor>::~cataleg() throw() {
     En cas que la clau k ja existeixi en el catàleg actualitza el valor
     associat. Genera un error en cas que la clau sigui l'string buit. */
 void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
-
+    /* falta el error si string esta vacio*/
+    insert (this->_root , k, v);
 }
 
 /* Elimina del catàleg el parell que té com a clau k.
@@ -44,7 +45,7 @@ void cataleg<Valor>::elimina(const string &k) throw(error) {
 /* Retorna true si i només si la clau k existeix dins del catàleg; false
     en cas contrari. */
 bool cataleg<Valor>::existeix(const string &k) const throw() {
-
+    return exists(this->_root,k);
 }
 
 /* Retorna el valor associat a la clau k; si no existeix cap parell amb
@@ -59,10 +60,10 @@ Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
 /* Retorna el nombre d'elements que s'han inserit en el catàleg
     fins aquest moment. */
 nat cataleg<Valor>::quants() const throw() {
-
+    return _size;
 }
 
-cataleg<Valor>* cataleg<Valor>::copy_nodes(NodeBST* node) {
+cataleg<Valor>* cataleg<Valor>::copy_nodes(NodeBST* node) { 
     NodeBST* aux;
     if (node == NULL) {
         aux = NULL;
@@ -91,3 +92,58 @@ void cataleg<Valor>::delete_nodes(NodeBST* node) {
     }
 }
 
+bool cataleg<Valor>::exists (NodeBST* node, const string &k) {
+    bool b;
+    if (node = NULL){
+        b = false;
+    }
+    if (node->key == k){
+        b = true;
+    }
+    if (node->key < k){
+        b = exists(node->left, k);
+    }
+    if (node->key > k){
+        b = exists(node->right, k);
+    }
+    return b;
+}
+
+void cataleg<Valor>::insert (NodeBST* node, const string &k, const Valor &v){
+    NodeBST* father = NULL;
+    NodeBST* actual = node;
+    if (node == NULL){
+        actual = new NodeBST;
+        actual->value = v;
+        actual->key = k;
+    }
+    else{ /*avancem fins a la fulla corresponent amb un punter indicant el antecesor*/
+        while(node != NULL && node->key != K){
+            father = node;
+            if(k < node->key){
+                node = node->left;
+            }
+            else{
+                node = node->right;
+            }
+        }
+    }
+    /*si hem arriibat a una fulla añadirem fill dret o esquerre al antecessor*/
+    if(node == NULL){
+        if(k < father->key){
+            NodeBST* aux = new node;
+            aux->key = k;
+            aux->value = v;
+            father->left = aux;
+        }
+        else{
+            NodeBST* aux = new node;
+            aux->key = k;
+            aux->value = v;
+            father->right = aux;
+        }
+    }
+    else{/*si ja existia un node amb aquesta clau actualitzem */
+        node->value = v;
+    }
+}
