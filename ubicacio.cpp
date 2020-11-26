@@ -5,10 +5,10 @@ ubicacio::ubicacio(int i, int j, int k) throw(error) {
     if (es_error(i, j, k)) {
         throw error(UbicacioIncorrecta);
     }
-    else{//si no hay error guardamos 
-    this->fila = i;
-    this->plaza = j;
-    this->piso = k;        
+    else {
+        this->fila = i;
+        this->plaza = j;
+        this->piso = k;        
     }
 }
 

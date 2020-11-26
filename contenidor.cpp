@@ -110,7 +110,7 @@ bool contenidor::errorMatricula (const string &matricula) {
         error = true;
     }
     else {
-        int i = 0;
+        unsigned int i = 0;
         while (i < matricula.size() && !error) {
             char letra = matricula[i];
             if (!((48 <= letra && letra <= 57) || (65 <= letra && letra <= 90))) {
