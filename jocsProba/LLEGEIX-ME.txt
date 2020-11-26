@@ -1,0 +1,24 @@
+1) Els jocs de proves públics de la pràctica es composen de:
+  - README.txt : aquest mateix fitxer.
+  - driver_gestterm.cpp :  programa  principal  que us permetrà  provar
+  les vostres classes.  Heu de compilar/linkar el driver  juntament amb
+  les vostres classes/mòduls.
+  - jp_public.tgz : pack  amb els fitxers que composen el joc de proves
+  públic.  S'ha de descomprimir  tot el seu contingut  al directori  on
+  teniu el vostre projecte.
+
+2) El fitxer amb  els  missatges  d'error  "gestterm.err"  és usat  pel 
+driver (driver_gestterm.cpp) i  ha d'estar  en el mateix  directori que 
+el programa  executable obtingut al compilar i muntar el driver amb les
+vostres classes i mòduls.
+
+3) Recordeu  que només  s'avaluaran  aquells mòduls  del  projecte  que 
+passin  el joc de proves públic.  Quan  es diu "passar"  vol dir que el  
+fitxer de sortida  que generi el vostre  projecte  ha de ser exactament 
+igual a la part corresponent  jp_public.res  (incloent els resultats de  
+memòria dinàmica).
+En cas que cap classe o mòdul passi el joc de proves públic el projecte
+es considerarà com No Presentat.
+
+
+Per qualsevol dubte consulteu amb el professor de laboratori.
