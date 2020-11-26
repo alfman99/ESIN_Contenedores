@@ -1,4 +1,5 @@
 #include "cataleg.hpp"
+#include "cataleg.rep"
 
 /* Constructora. Crea un catàleg buit on numelems és el nombre
     aproximat d'elements que com a màxim s'inseriran al catàleg. */
@@ -16,7 +17,7 @@ cataleg<Valor>::cataleg(const cataleg& c) throw(error) {
 cataleg& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
     if (this != &a) {
         NodeBST* aux;
-        aux = copia_nodes(a._root);
+        aux = copy_nodes(a._root);
         esborra_nodes(this->_root);
         this->_root = aux;
     }
@@ -63,6 +64,7 @@ nat cataleg<Valor>::quants() const throw() {
     return _size;
 }
 
+template<typename Valor>
 cataleg<Valor>* cataleg<Valor>::copy_nodes(NodeBST* node) { 
     NodeBST* aux;
     if (node == NULL) {
@@ -84,7 +86,8 @@ cataleg<Valor>* cataleg<Valor>::copy_nodes(NodeBST* node) {
     return aux;
 }
 
-void cataleg<Valor>::delete_nodes(NodeBST* node) {
+template<typename Valor>
+void cataleg<Valor>::delete_nodes(NodeBST<Valor>* node) {
     if (node != NULL) {
         delete_nodes(node->left);
         delete_nodes(node->right);
@@ -92,7 +95,8 @@ void cataleg<Valor>::delete_nodes(NodeBST* node) {
     }
 }
 
-bool cataleg<Valor>::exists (NodeBST* node, const string &k) {
+template<typename Valor>
+bool cataleg<Valor>::exists (NodeBST<Valor>* node, const string &k) {
     bool b;
     if (node = NULL){
         b = false;
@@ -109,7 +113,8 @@ bool cataleg<Valor>::exists (NodeBST* node, const string &k) {
     return b;
 }
 
-void cataleg<Valor>::insert (NodeBST* node, const string &k, const Valor &v){
+template <typename Valor>
+void cataleg<Valor>::insert (NodeBST<Valor>* node, const string &k, const Valor &v){
     NodeBST* father = NULL;
     NodeBST* actual = node;
     if (node == NULL){
@@ -131,13 +136,13 @@ void cataleg<Valor>::insert (NodeBST* node, const string &k, const Valor &v){
     /*si hem arriibat a una fulla añadirem fill dret o esquerre al antecessor*/
     if(node == NULL){
         if(k < father->key){
-            NodeBST* aux = new node;
+            NodeBST* aux = new NodeBST;
             aux->key = k;
             aux->value = v;
             father->left = aux;
         }
         else{
-            NodeBST* aux = new node;
+            NodeBST* aux = new NodeBST;
             aux->key = k;
             aux->value = v;
             father->right = aux;

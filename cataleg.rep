@@ -1,16 +1,24 @@
 
+template<typename Valor>
 struct NodeBST {
     NodeBST* left;
     NodeBST* right;
     string key;
     Valor value;
-}
+};
 
-NodeBST* _root;
+NodeBST<int>* _root;
+
 int _size;
 
-cataleg<Valor>* copia_nodes(NodeBST* node);
-void delete_nodes(NodeBST* node);
+template<typename Valor>
+cataleg<Valor>* copy_nodes(NodeBST<Valor>* node);
 
-bool exists (NodeBST* node, const string &k);
-void insert (NodeBST* node, const string &k, const Valor &v);
+template<typename Valor>
+void delete_nodes(NodeBST<Valor>* node);
+
+template<typename Valor>
+bool exists(NodeBST<Valor>* node, const string &k);
+
+template<typename Valor>
+void insert(NodeBST<Valor>* node, const string &k, const Valor &v);
