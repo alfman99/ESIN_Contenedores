@@ -440,7 +440,7 @@ int main(){
   //contenidor
   d.add_call("longitud", tracta_longitud, "contenidor");
   d.add_call("matricula", tracta_matricula, "contenidor");
-
+/*
   //ubicacio
   d.add_call("filera", tracta_filera, "ubicacio");
   d.add_call("placa", tracta_placa, "ubicacio");
@@ -483,6 +483,7 @@ int main(){
   d.install_type<ubicacio>();
   d.install_type<cataleg<int> >();
   d.install_type<terminal>();
-
+  */
   d.go();
+
 }

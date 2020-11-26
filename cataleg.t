@@ -1,52 +1,82 @@
 #include "cataleg.hpp"
-#include "cataleg.rep"
+
+#include <esin/util>
 
 /* Constructora. Crea un catàleg buit on numelems és el nombre
     aproximat d'elements que com a màxim s'inseriran al catàleg. */
-explicit cataleg<Valor>::cataleg(nat numelems) throw(error) {
-    this->size = numelems;
-    this->_root = NULL;
+template<typename Valor>
+cataleg<Valor>::cataleg(nat numelems) throw(error) {
+    this->_M = numelems;
+
 }
 
 /* Constructora per còpia, assignació i destructora. */
+template<typename Valor>
 cataleg<Valor>::cataleg(const cataleg& c) throw(error) {
-    this->_size = c._size;
-    this->_root = copy_nodes(c._root);
+
 }
 
-cataleg& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
-    if (this != &a) {
-        NodeBST* aux;
-        aux = copy_nodes(a._root);
-        esborra_nodes(this->_root);
-        this->_root = aux;
-    }
-    this->_size = c._size;
-    return *this;
+template<typename Valor>
+cataleg<Valor>& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
+    
 }
 
+template<typename Valor>
 cataleg<Valor>::~cataleg() throw() {
-    delete_nodes(this->_root);
+
 }
 
 /* Mètode modificador. Insereix el parell <clau, valor> indicat.
     En cas que la clau k ja existeixi en el catàleg actualitza el valor
     associat. Genera un error en cas que la clau sigui l'string buit. */
+template<typename Valor>
 void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
-    /* falta el error si string esta vacio*/
-    insert (this->_root , k, v);
+    if (k.empty()) {
+        throw error(ClauStringBuit);
+    }
+    else {
+        util::Hash<string> hashFunction;
+        unsigned long i = hashFunction(k);
+
+        node_hash *p = this->_taula[i];
+
+        bool trobat = false;
+
+        while (p != NULL && !trobat) {
+            if (p->_k == k) {
+                trobat = true;
+            }
+            else {
+                p = p->_seg;
+            }
+        }
+
+        if (trobat) {
+            p->_v = v;
+        }
+        else {
+            node_hash* aux = new node_hash;
+            aux->_k = k;
+            aux->_v = v;
+            aux->_seg = this->_taula[i];
+            this->_taula[i] = aux;
+            this->_quants;
+        }
+    }
 }
 
 /* Elimina del catàleg el parell que té com a clau k.
     En cas que la clau k no existeixi en el catàleg genera un error. */
+template<typename Valor>
 void cataleg<Valor>::elimina(const string &k) throw(error) {
 
 }
 
 /* Retorna true si i només si la clau k existeix dins del catàleg; false
     en cas contrari. */
+template<typename Valor>
 bool cataleg<Valor>::existeix(const string &k) const throw() {
-    return exists(this->_root,k);
+
 }
 
 /* Retorna el valor associat a la clau k; si no existeix cap parell amb
@@ -54,101 +84,37 @@ bool cataleg<Valor>::existeix(const string &k) const throw() {
     cataleg<int> ct;
     ...
     int n = ct["dia"]; */
+template<typename Valor>
 Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
 
+    Valor returnVal;
+
+    util::Hash<string> hashFunction;
+    unsigned long i = hashFunction(k);
+    node_hash* p = _taula[i];
+    bool trobat = false;
+    while (p != NULL && !trobat) {
+        if (p->_k == k) {
+            trobat = true;
+            returnVal = p->_v;
+        }
+        else {
+            p = p->_seg;
+        }
+    }
+
+    if (trobat) {
+        return returnVal;
+    }
+    else {
+        throw error(ClauInexistent);
+    }  
+    
 }
 
 /* Retorna el nombre d'elements que s'han inserit en el catàleg
     fins aquest moment. */
+template<typename Valor>
 nat cataleg<Valor>::quants() const throw() {
-    return _size;
-}
 
-template<typename Valor>
-cataleg<Valor>* cataleg<Valor>::copy_nodes(NodeBST* node) { 
-    NodeBST* aux;
-    if (node == NULL) {
-        aux = NULL;
-    } 
-    else {
-        aux = new NodeBST;
-        try {
-            aux->key = node->key;
-            aux->value = node->value;
-            aux->left = copy_nodes(node->left);
-            aux->right = copy_nodes(node->right);
-        }
-        catch(...) {
-            delete aux;
-            throw;
-        }
-    }
-    return aux;
-}
-
-template<typename Valor>
-void cataleg<Valor>::delete_nodes(NodeBST<Valor>* node) {
-    if (node != NULL) {
-        delete_nodes(node->left);
-        delete_nodes(node->right);
-        delete node;
-    }
-}
-
-template<typename Valor>
-bool cataleg<Valor>::exists (NodeBST<Valor>* node, const string &k) {
-    bool b;
-    if (node = NULL){
-        b = false;
-    }
-    if (node->key == k){
-        b = true;
-    }
-    if (node->key < k){
-        b = exists(node->left, k);
-    }
-    if (node->key > k){
-        b = exists(node->right, k);
-    }
-    return b;
-}
-
-template <typename Valor>
-void cataleg<Valor>::insert (NodeBST<Valor>* node, const string &k, const Valor &v){
-    NodeBST* father = NULL;
-    NodeBST* actual = node;
-    if (node == NULL){
-        actual = new NodeBST;
-        actual->value = v;
-        actual->key = k;
-    }
-    else{ /*avancem fins a la fulla corresponent amb un punter indicant el antecesor*/
-        while(node != NULL && node->key != K){
-            father = node;
-            if(k < node->key){
-                node = node->left;
-            }
-            else{
-                node = node->right;
-            }
-        }
-    }
-    /*si hem arriibat a una fulla añadirem fill dret o esquerre al antecessor*/
-    if(node == NULL){
-        if(k < father->key){
-            NodeBST* aux = new NodeBST;
-            aux->key = k;
-            aux->value = v;
-            father->left = aux;
-        }
-        else{
-            NodeBST* aux = new NodeBST;
-            aux->key = k;
-            aux->value = v;
-            father->right = aux;
-        }
-    }
-    else{/*si ja existia un node amb aquesta clau actualitzem */
-        node->value = v;
-    }
 }

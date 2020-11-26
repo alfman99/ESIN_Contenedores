@@ -1,5 +1,4 @@
 string matri;   //matri conte la matricula del nostre contenidor
 nat longi;      //longi conte la longitud del nostre contenidor 
 
-bool es_error(const string &m, nat l);
-bool checkMatricula (const string &matricula);
+bool errorMatricula (const string &matricula);

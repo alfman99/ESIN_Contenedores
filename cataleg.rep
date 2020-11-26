@@ -1,24 +1,10 @@
 
-template<typename Valor>
-struct NodeBST {
-    NodeBST* left;
-    NodeBST* right;
-    string key;
-    Valor value;
+struct node_hash {
+    string _k;
+    Valor _v;
+    node_hash* _seg;
 };
 
-NodeBST<int>* _root;
-
-int _size;
-
-template<typename Valor>
-cataleg<Valor>* copy_nodes(NodeBST<Valor>* node);
-
-template<typename Valor>
-void delete_nodes(NodeBST<Valor>* node);
-
-template<typename Valor>
-bool exists(NodeBST<Valor>* node, const string &k);
-
-template<typename Valor>
-void insert(NodeBST<Valor>* node, const string &k, const Valor &v);
+node_hash** _taula;
+nat _M;
+nat _quants;

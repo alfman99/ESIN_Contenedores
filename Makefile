@@ -1,4 +1,4 @@
-OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O0 -Wno-sign-compare -std=c++11 -g -fpermissive -Wdeprecated
+OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O0 -Wno-sign-compare -Wall -Wextra -std=c++11 -g
 
 program.exe: driver_gestterm.o ubicacio.o contenidor.o terminal.o
 	g++ -o program.exe driver_gestterm.o ubicacio.o contenidor.o terminal.o -lesin
@@ -22,4 +22,3 @@ clean:
 	rm *.o
 	rm *.exe
 	rm *.gch
-#-Wall -Wextra

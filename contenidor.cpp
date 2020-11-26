@@ -6,13 +6,17 @@
     formada exclusivament per lletres majúscules i dígits,
     o si l no pertany a {10, 20, 30} */
 contenidor::contenidor(const string &m, nat l) throw(error){
-    if (this->es_error(m, l)) {
+    if (l != 10 && l != 20 && l != 30) {
+        throw error(LongitudIncorrecta);
+    }
+    else if (errorMatricula(m)) {
         throw error(MatriculaIncorrecta);
     }
-    else{//si no hay error guardamos 
+    else{
         this->matri = m;
         this->longi = l;
     }
+    
 }
 
 /* Constructora per còpia, assignació i destructora. */
@@ -99,19 +103,13 @@ bool contenidor::operator>=(const contenidor &c) const throw(){
     return *this > c || *this == c;
 }
 
-bool es_error(const string &m, nat l) {
-    if (l != 10 || l != 20 || l != 30) {
-        return true;
-    }
-    return checkMatricula(m);
-}
-
-bool checkMatricula (const string &matricula) {
+bool contenidor::errorMatricula (const string &matricula) {
     if (matricula.size() <= 0) {
         return true;
     }
-    for(char letra : matricula) {
-        if (!((48 <= letra && letra <= 57) || (65 <= letra && letra <= 90) || (97 <= letra && letra <= 122))) {
+    for(int i = 0; i < matricula.size(); i++) {
+        char letra = matricula[i];
+        if (!((48 <= letra && letra <= 57) || (65 <= letra && letra <= 90))) {
             return true;
         }
     }
