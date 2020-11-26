@@ -17,7 +17,6 @@ contenidor::contenidor(const string &m, nat l) throw(error){
         this->matri = m;
         this->longi = l;
     }
-    
 }
 
 /* Constructora per còpia, assignació i destructora. */
@@ -105,14 +104,21 @@ bool contenidor::operator>=(const contenidor &c) const throw(){
 }
 
 bool contenidor::errorMatricula (const string &matricula) {
+    bool error = false;
+
     if (matricula.size() <= 0) {
-        return true;
+        error = true;
     }
-    for(int i = 0; i < matricula.size(); i++) {
-        char letra = matricula[i];
-        if (!((48 <= letra && letra <= 57) || (65 <= letra && letra <= 90))) {
-            return true;
+    else {
+        int i = 0;
+        while (i < matricula.size() && !error) {
+            char letra = matricula[i];
+            if (!((48 <= letra && letra <= 57) || (65 <= letra && letra <= 90))) {
+                error = true;
+            }
+            i++;
         }
     }
-    return false;
+    
+    return error;
 }
