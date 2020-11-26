@@ -53,7 +53,7 @@ int ubicacio::pis() const throw() {
    coincideixen i el pis del paràmetre implícit és més petit que el d'u.
    La resta d'operadors es defineixen consistentment respecte <. */
 bool ubicacio::operator == (const ubicacio & u) const throw() {
-    return this->ila == u.fila && this->plaza == u.plaza && this->piso == u.piso;
+    return this->fila == u.fila && this->plaza == u.plaza && this->piso == u.piso;
 }
 
 bool ubicacio::operator != (const ubicacio & u) const throw() {
