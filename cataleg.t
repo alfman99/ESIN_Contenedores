@@ -7,7 +7,11 @@
 template<typename Valor>
 cataleg<Valor>::cataleg(nat numelems) throw(error) {
     this->_M = numelems;
-
+    this->_taula = new node_hash*[numelems];
+    this->_quants = 0;
+    for (int i = 0; i< _M; i++){
+        this->_taula[i] = NULL;
+    }
 }
 
 /* Constructora per còpia, assignació i destructora. */
@@ -23,6 +27,18 @@ cataleg<Valor>& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
 
 template<typename Valor>
 cataleg<Valor>::~cataleg() throw() {
+node_hash* actual;
+node_hash* seguent;
+this->_quants = 0;
+for(int i = 0; i < this->_M ; i++ ){
+    actual = _taula[i]
+    while(actual != NULL){
+        seguent = actual->seguent;
+        delete actual;
+        actual = seguent;
+    }
+}
+delete[] this->_taula;
 
 }
 

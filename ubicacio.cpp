@@ -2,13 +2,13 @@
 #include "ubicacio.rep"
 
 ubicacio::ubicacio(int i, int j, int k) throw(error) {
-    if (es_error(i, j, k)) {
-        throw error(UbicacioIncorrecta);
-    }
-    else {
+    if ((i >= 0 && j >= 0 && k >= 0) || (i == -1 && j == 0 && k == 0) || (i == -1 && j == -1 && k == -1)) {
         this->fila = i;
         this->plaza = j;
-        this->piso = k;        
+        this->piso = k;
+    }
+    else {
+        throw error(UbicacioIncorrecta); 
     }
 }
 
@@ -94,13 +94,3 @@ bool ubicacio::operator >= (const ubicacio & u) const throw() {
     return *this > u || *this == u;
 }
 
-bool ubicacio::es_error(int i, int j, int k) {
-    bool b;
-    if ((i >= 0 && j >= 0 && k >= 0) || (i == -1 && j == 0 && k == 0) || (i == -1 && j == -1 && k == -1)) {
-        b = false;
-    }
-    else {
-        b = true;
-    }
-    return b;
-}
