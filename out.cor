@@ -1,6 +1,6 @@
 ###!----------------------------------------------
 ###!
-###! JOCS DE PROVES DE LA CLASSE CONTENIDOR
+###! JOC DE PROVES DE LA CLASSE UBICACIO
 ###!
 ###!----------------------------------------------
 ###!
@@ -10,106 +10,104 @@
 ###!------------------------------------------------------------------
 ###!
 ###!------------------------------------------------------------------
-###1.1 Error 20: Matricula incorrecta
+###1.1 Error 10: Ubicacio incorrecta
 ###!------------------------------------------------------------------
 ###!
-#init c contenidor AAAAAAAAAAAa 10
-Error::contenidor:20:Matricula incorrecta.
-##Error::contenidor:20:Matricula incorrecta.
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstxyz 10
-Error::contenidor:20:Matricula incorrecta.
-##Error::contenidor:20:Matricula incorrecta.
-#init c contenidor ABCÇDEFGHIJKLMNÑOPQRSTUVWXYZ 10
-Error::contenidor:20:Matricula incorrecta.
-##Error::contenidor:20:Matricula incorrecta.
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZÁÀÉÈÍÌÓÒÚÙÄËÏÖÜÂÊÎÔÛ 10
-Error::contenidor:20:Matricula incorrecta.
-##Error::contenidor:20:Matricula incorrecta.
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZÇÑÁÀÉÈÍÌÓÒÚÙÄËÏÖÜÂÊÎÔÛabcdefghijklmnopqrstxyzçñáàéèíìóòúùäëïöüâêîôû[]()!"·$%&/=?¿*-_.:,;\ºª@#~¬{}´`^ 10
-Error::contenidor:20:Matricula incorrecta.
-##Error::contenidor:20:Matricula incorrecta.
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZÇÑÁÀÉÈÍÌÓÒÚÙÄËÏÖÜÂÊÎÔÛabcdefghijklmnopqrstxyzçñáàéèíìóòúùäëïöüâêîôû 11
-Error::contenidor:20:Matricula incorrecta.
-##Error::contenidor:20:Matricula incorrecta.
-###!
-###!
-###!----------------------------------------------
-###1.2 Error 21: Longitud incorrecta
-###!----------------------------------------------
-###!
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZ 11
-Error::contenidor:21:Longitud incorrecta.
-##Error::contenidor:21:Longitud incorrecta.
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZ 100
-Error::contenidor:21:Longitud incorrecta.
-##Error::contenidor:21:Longitud incorrecta.
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZ 12
-Error::contenidor:21:Longitud incorrecta.
-##Error::contenidor:21:Longitud incorrecta.
-#init c contenidor ABCDEFGHIJKLMNOPQRSTUVWXYZ 210
-Error::contenidor:21:Longitud incorrecta.
-##Error::contenidor:21:Longitud incorrecta.
+#init u ubicacio -2 0 0
+Error::gen_driver:2:Num. argumentos incorrecto
+##Error::ubicacio:10:Ubicacio incorrecta.
+#init u ubicacio -2 -1 -1
+Error::gen_driver:2:Num. argumentos incorrecto
+##Error::ubicacio:10:Ubicacio incorrecta.
+#init u ubicacio -1 -2 -1
+Error::gen_driver:2:Num. argumentos incorrecto
+##Error::ubicacio:10:Ubicacio incorrecta.
+#init u ubicacio -1 -1 -2
+Error::gen_driver:2:Num. argumentos incorrecto
+##Error::ubicacio:10:Ubicacio incorrecta.
+#init u ubicacio -1 10 10
+Error::gen_driver:2:Num. argumentos incorrecto
+##Error::ubicacio:10:Ubicacio incorrecta.
 ###!
 ###!
 ###!
-###!----------------------------------------------
-###2. Mètodes consultors
-###!----------------------------------------------
+###!------------------------------------------------------------------
+###2 Mètodes consultors
+###!------------------------------------------------------------------
 ###!
-#init a1 contenidor A1 10
-#init a2 contenidor A1 20
-#init a3 contenidor A1 30
-#init b1 contenidor B1 10
-#init b2 contenidor B1 20
-#init b3 contenidor B1 30
-###!
-###!
-###!----------------------------------------------
-###2.1 Matricula
-###!----------------------------------------------
-###!
-#a1 matricula
-A1
-##A1
-#a2 matricula
-A1
-##A1
-#a3 matricula
-A1
-##A1
-#b1 matricula
-B1
-##B1
-#b2 matricula
-B1
-##B1
-#b3 matricula
-B1
-##B1
+#init u000 ubicacio 0 0 0
+Error::gen_driver:2:Num. argumentos incorrecto
+#init u007 ubicacio 0 0 7
+Error::gen_driver:2:Num. argumentos incorrecto
+#init u064 ubicacio 0 6 4
+Error::gen_driver:2:Num. argumentos incorrecto
+#init u_100 ubicacio -1 0 0
+Error::gen_driver:2:Num. argumentos incorrecto
+#init u_1_1_1 ubicacio -1 -1 -1
+Error::gen_driver:2:Num. argumentos incorrecto
 ###!
 ###!
-###!----------------------------------------------
-###2.2 Longitud
-###!----------------------------------------------
+###!------------------------------------------------------------------
+###2.1 Filera
+###!------------------------------------------------------------------
 ###!
-#a1 longitud
-10
-##10
-#a2 longitud
-20
-##20
-#a3 longitud
-30
-##30
-#b1 longitud
-10
-##10
-#b2 longitud
-20
-##20
-#b3 longitud
-30
-##30
+#u000 filera
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u007 filera
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u064 filera
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u_100 filera
+Error::gen_driver:1:Operacion incorrecta
+##-1
+#u_1_1_1 filera
+Error::gen_driver:1:Operacion incorrecta
+##-1
+###!
+###!
+###!------------------------------------------------------------------
+###2.2 Placa
+###!------------------------------------------------------------------
+###!
+#u000 placa
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u007 placa
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u064 placa
+Error::gen_driver:1:Operacion incorrecta
+##6
+#u_100 placa
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u_1_1_1 placa
+Error::gen_driver:1:Operacion incorrecta
+##-1
+###!
+###!
+###!------------------------------------------------------------------
+###2.3 Pis
+###!------------------------------------------------------------------
+###!
+#u000 pis
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u007 pis
+Error::gen_driver:1:Operacion incorrecta
+##7
+#u064 pis
+Error::gen_driver:1:Operacion incorrecta
+##4
+#u_100 pis
+Error::gen_driver:1:Operacion incorrecta
+##0
+#u_1_1_1 pis
+Error::gen_driver:1:Operacion incorrecta
+##-1
 ###!
 ###!
 ###!
@@ -121,224 +119,161 @@ B1
 ###3.1 Operador ==
 ###!----------------------------------------------
 ###!
-#a1 == a1
-true
+#u000 == u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 == a2
-false
+#u000 == u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == a3
-false
+#u000 == u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == b1
-false
+#u000 == u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == b2
-false
+#u000 == u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == b3
-false
+#u007 == u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == a1
-false
-##false
-#a2 == a2
-true
+#u007 == u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 == a3
-false
+#u007 == u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == b1
-false
+#u007 == u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == b2
-false
+#u007 == u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == b3
-false
+#u064 == u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == a1
-false
+#u064 == u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == a2
-false
-##false
-#a3 == a3
-true
+#u064 == u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 == b1
-false
+#u064 == u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == b2
-false
+#u064 == u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == b3
-false
+#u_100 == u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == a1
-false
+#u_100 == u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == a2
-false
+#u_100 == u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == a3
-false
-##false
-#b1 == b1
-true
+#u_100 == u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 == b2
-false
+#u_100 == u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == b3
-false
+#u_1_1_1 == u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 == a1
-false
+#u_1_1_1 == u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 == a2
-false
+#u_1_1_1 == u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 == a3
-false
+#u_1_1_1 == u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 == b1
-false
-##false
-#b2 == b2
-true
-##true
-#b2 == b3
-false
-##false
-#b3 == a1
-false
-##false
-#b3 == a2
-false
-##false
-#b3 == a3
-false
-##false
-#b3 == b1
-false
-##false
-#b3 == b2
-false
-##false
-#b3 == b3
-true
+#u_1_1_1 == u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
 ###!----------------------------------------------
-###3.2 Operador =!
+###3.2 Operador !=
 ###!----------------------------------------------
 ###!
-#a1 != a1
-false
+#u000 != u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 != a2
-true
+#u000 != u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != a3
-true
+#u000 != u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != b1
-true
+#u000 != u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != b2
-true
+#u000 != u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != b3
-true
+#u007 != u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != a1
-true
-##true
-#a2 != a2
-false
+#u007 != u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 != a3
-true
+#u007 != u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != b1
-true
+#u007 != u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != b2
-true
+#u007 != u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != b3
-true
+#u064 != u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != a1
-true
+#u064 != u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != a2
-true
-##true
-#a3 != a3
-false
+#u064 != u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 != b1
-true
+#u064 != u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != b2
-true
+#u064 != u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != b3
-true
+#u_100 != u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != a1
-true
+#u_100 != u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != a2
-true
+#u_100 != u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != a3
-true
-##true
-#b1 != b1
-false
+#u_100 != u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 != b2
-true
+#u_100 != u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != b3
-true
+#u_1_1_1 != u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 != a2
-true
+#u_1_1_1 != u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 != a3
-true
+#u_1_1_1 != u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 != b1
-true
+#u_1_1_1 != u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 != b2
-false
-##false
-#b2 != b3
-true
-##true
-#b3 != a1
-true
-##true
-#b3 != a2
-true
-##true
-#b3 != a3
-true
-##true
-#b3 != b1
-true
-##true
-#b3 != b2
-true
-##true
-#b3 != b3
-false
+#u_1_1_1 != u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
 ###!
 ###!
@@ -346,113 +281,80 @@ false
 ###3.3 Operador <
 ###!----------------------------------------------
 ###!
-#a1 < a1
-false
+#u000 < u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 < a2
-true
+#u000 < u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < a3
-true
+#u000 < u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < b1
-true
+#u000 < u_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#u000 < u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#u007 < u000
+Error::gen_driver:4:Objeto inexistente
+##false
+#u007 < u007
+Error::gen_driver:4:Objeto inexistente
+##false
+#u007 < u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < b2
-true
+#u007 < u_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#u007 < u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 < u000
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 < u007
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 < u064
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 < u_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 < u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#u_100 < u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < b3
-true
+#u_100 < u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 < a1
-false
-##false
-#a2 < a2
-false
-##false
-#a2 < a3
-true
+#u_100 < u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 < b1
-true
+#u_100 < u_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#u_100 < u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#u_1_1_1 < u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 < b2
-true
+#u_1_1_1 < u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 < b3
-true
+#u_1_1_1 < u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 < a1
-false
-##false
-#a3 < a2
-false
-##false
-#a3 < a3
-false
-##false
-#a3 < b1
-true
+#u_1_1_1 < u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 < b2
-true
-##true
-#a3 < b3
-true
-##true
-#b1 < a1
-false
-##false
-#b1 < a2
-false
-##false
-#b1 < a3
-false
-##false
-#b1 < b1
-false
-##false
-#b1 < b2
-true
-##true
-#b1 < b3
-true
-##true
-#b2 < a1
-false
-##false
-#b2 < a2
-false
-##false
-#b2 < a3
-false
-##false
-#b2 < b1
-false
-##false
-#b2 < b2
-false
-##false
-#b2 < b3
-true
-##true
-#b3 < a1
-false
-##false
-#b3 < a2
-false
-##false
-#b3 < a3
-false
-##false
-#b3 < b1
-false
-##false
-#b3 < b2
-false
-##false
-#b3 < b3
-false
+#u_1_1_1 < u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
 ###!
 ###!
@@ -460,113 +362,80 @@ false
 ###3.4 Operador <=
 ###!----------------------------------------------
 ###!
-#a1 <= a1
-true
+#u000 <= u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 <= a2
-true
+#u000 <= u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 <= a3
-true
+#u000 <= u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 <= b1
-true
-##true
-#a1 <= b2
-true
-##true
-#a1 <= b3
-true
-##true
-#a2 <= a1
-false
+#u000 <= u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 <= a2
-true
-##true
-#a2 <= a3
-true
-##true
-#a2 <= b1
-true
-##true
-#a2 <= b2
-true
-##true
-#a2 <= b3
-true
-##true
-#a3 <= a1
-false
+#u000 <= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 <= a2
-false
+#u007 <= u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 <= a3
-true
+#u007 <= u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= b1
-true
+#u007 <= u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= b2
-true
+#u007 <= u_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#u007 <= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 <= u000
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 <= u007
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 <= u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= b3
-true
+#u064 <= u_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#u064 <= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#u_100 <= u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= a1
-false
-##false
-#b1 <= a2
-false
-##false
-#b1 <= a3
-false
-##false
-#b1 <= b1
-true
+#u_100 <= u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= b2
-true
+#u_100 <= u064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= b3
-true
+#u_100 <= u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 <= a1
-false
+#u_100 <= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 <= a2
-false
-##false
-#b2 <= a3
-false
-##false
-#b2 <= b1
-false
-##false
-#b2 <= b2
-true
+#u_1_1_1 <= u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 <= b3
-true
+#u_1_1_1 <= u007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b3 <= a1
-false
-##false
-#b3 <= a2
-false
-##false
-#b3 <= a3
-false
-##false
-#b3 <= b1
-false
-##false
-#b3 <= b2
-false
-##false
-#b3 <= b3
-true
+#u_1_1_1 <= u064
+Error::gen_driver:4:Objeto inexistente
+##true
+#u_1_1_1 <= u_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#u_1_1_1 <= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
@@ -574,113 +443,80 @@ true
 ###3.5 Operador >
 ###!----------------------------------------------
 ###!
-#a1 > a1
-false
+#u000 > u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 > a2
-false
+#u000 > u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 > a3
-false
+#u000 > u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 > b1
-false
-##false
-#a1 > b2
-false
-##false
-#a1 > b3
-false
-##false
-#a2 > a1
-true
+#u000 > u_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 > a2
-false
-##false
-#a2 > a3
-false
-##false
-#a2 > b1
-false
-##false
-#a2 > b2
-false
-##false
-#a2 > b3
-false
-##false
-#a3 > a1
-true
+#u000 > u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 > a2
-true
+#u007 > u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 > a3
-false
+#u007 > u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > b1
-false
+#u007 > u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > b2
-false
+#u007 > u_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#u007 > u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 > u000
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 > u007
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 > u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > b3
-false
+#u064 > u_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 > u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#u_100 > u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > a1
-true
-##true
-#b1 > a2
-true
-##true
-#b1 > a3
-true
-##true
-#b1 > b1
-false
+#u_100 > u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > b2
-false
+#u_100 > u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > b3
-false
+#u_100 > u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 > a1
-true
+#u_100 > u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 > a2
-true
-##true
-#b2 > a3
-true
-##true
-#b2 > b1
-true
-##true
-#b2 > b2
-false
+#u_1_1_1 > u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 > b3
-false
+#u_1_1_1 > u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b3 > a1
-true
-##true
-#b3 > a2
-true
-##true
-#b3 > a3
-true
-##true
-#b3 > b1
-true
-##true
-#b3 > b2
-true
-##true
-#b3 > b3
-false
+#u_1_1_1 > u064
+Error::gen_driver:4:Objeto inexistente
+##false
+#u_1_1_1 > u_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#u_1_1_1 > u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
 ###!
 ###!
@@ -688,113 +524,80 @@ false
 ###3.6 Operador >=
 ###!----------------------------------------------
 ###!
-#a1 >= a1
-true
+#u000 >= u000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 >= a2
-false
+#u000 >= u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= a3
-false
+#u000 >= u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= b1
-false
+#u000 >= u_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#u000 >= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#u007 >= u000
+Error::gen_driver:4:Objeto inexistente
+##true
+#u007 >= u007
+Error::gen_driver:4:Objeto inexistente
+##true
+#u007 >= u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= b2
-false
+#u007 >= u_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#u007 >= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 >= u000
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 >= u007
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 >= u064
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 >= u_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#u064 >= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#u_100 >= u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= b3
-false
+#u_100 >= u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= a1
-true
-##true
-#a2 >= a2
-true
-##true
-#a2 >= a3
-false
+#u_100 >= u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= b1
-false
+#u_100 >= u_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#u_100 >= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#u_1_1_1 >= u000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= b2
-false
+#u_1_1_1 >= u007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= b3
-false
+#u_1_1_1 >= u064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 >= a1
-true
-##true
-#a3 >= a2
-true
-##true
-#a3 >= a3
-true
-##true
-#a3 >= b1
-false
+#u_1_1_1 >= u_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 >= b2
-false
-##false
-#a3 >= b3
-false
-##false
-#b1 >= a1
-true
-##true
-#b1 >= a2
-true
-##true
-#b1 >= a3
-true
-##true
-#b1 >= b1
-true
-##true
-#b1 >= b2
-false
-##false
-#b1 >= b3
-false
-##false
-#b2 >= a1
-true
-##true
-#b2 >= a2
-true
-##true
-#b2 >= a3
-true
-##true
-#b2 >= b1
-true
-##true
-#b2 >= b2
-true
-##true
-#b2 >= b3
-false
-##false
-#b3 >= a1
-true
-##true
-#b3 >= a2
-true
-##true
-#b3 >= a3
-true
-##true
-#b3 >= b1
-true
-##true
-#b3 >= b2
-true
-##true
-#b3 >= b3
-true
+#u_1_1_1 >= u_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
@@ -803,719 +606,564 @@ true
 ###4 Constructora per copia
 ###!----------------------------------------------
 ###!
-#initcopy c1 = b1
-#initcopy c2 = b2
-#initcopy c3 = b3
+#initcopy c000 = u000
+Error::gen_driver:4:Objeto inexistente
+#initcopy c007 = u007
+Error::gen_driver:4:Objeto inexistente
+#initcopy c064 = u064
+Error::gen_driver:4:Objeto inexistente
+#initcopy c_100 = u_100
+Error::gen_driver:4:Objeto inexistente
+#initcopy c_1_1_1 = u_1_1_1
+Error::gen_driver:4:Objeto inexistente
+###!
+###!
+###!------------------------------------------------------------------
+###4.1 Filera
+###!------------------------------------------------------------------
+###!
+#c000 filera
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c007 filera
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c064 filera
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c_100 filera
+Error::gen_driver:1:Operacion incorrecta
+##-1
+#c_1_1_1 filera
+Error::gen_driver:1:Operacion incorrecta
+##-1
+###!
+###!
+###!------------------------------------------------------------------
+###4.2 Placa
+###!------------------------------------------------------------------
+###!
+#c000 placa
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c007 placa
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c064 placa
+Error::gen_driver:1:Operacion incorrecta
+##6
+#c_100 placa
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c_1_1_1 placa
+Error::gen_driver:1:Operacion incorrecta
+##-1
+###!
+###!
+###!------------------------------------------------------------------
+###4.3 Pis
+###!------------------------------------------------------------------
+###!
+#c000 pis
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c007 pis
+Error::gen_driver:1:Operacion incorrecta
+##7
+#c064 pis
+Error::gen_driver:1:Operacion incorrecta
+##4
+#c_100 pis
+Error::gen_driver:1:Operacion incorrecta
+##0
+#c_1_1_1 pis
+Error::gen_driver:1:Operacion incorrecta
+##-1
 ###!
 ###!
 ###!----------------------------------------------
-###4.1 Matricula
+###4.4 Operador ==
 ###!----------------------------------------------
 ###!
-#c1 matricula
-B1
-##B1
-#c2 matricula
-B1
-##B1
-#c3 matricula
-B1
-##B1
-###!
-###!
-###!----------------------------------------------
-###4.2 Longitud
-###!----------------------------------------------
-###!
-#c1 longitud
-10
-##10
-#c2 longitud
-20
-##20
-#c3 longitud
-30
-##30
-###!
-###!
-###!----------------------------------------------
-###4.3 Operador ==
-###!----------------------------------------------
-###!
-#a1 == a1
-true
+#c000 == c000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 == a2
-false
+#c000 == c007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == a3
-false
+#c000 == c064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == c1
-false
+#c000 == c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == c2
-false
+#c000 == c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == c3
-false
+#c007 == c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == a1
-false
-##false
-#a2 == a2
-true
-##true
-#a2 == a3
-false
-##false
-#a2 == c1
-false
-##false
-#a2 == c2
-false
-##false
-#a2 == c3
-false
-##false
-#a3 == a1
-false
-##false
-#a3 == a2
-false
-##false
-#a3 == a3
-true
-##true
-#a3 == c1
-false
-##false
-#a3 == c2
-false
-##false
-#a3 == c3
-false
-##false
-#c1 == a1
-false
-##false
-#c1 == a2
-false
-##false
-#c1 == a3
-false
-##false
-#c1 == c1
-true
-##true
-#c1 == c2
-false
-##false
-#c1 == c3
-false
-##false
-#c2 == a1
-false
-##false
-#c2 == a2
-false
-##false
-#c2 == a3
-false
-##false
-#c2 == c1
-false
-##false
-#c2 == c2
-true
-##true
-#c2 == c3
-false
-##false
-#c3 == a1
-false
-##false
-#c3 == a2
-false
-##false
-#c3 == a3
-false
-##false
-#c3 == c1
-false
-##false
-#c3 == c2
-false
-##false
-#c3 == c3
-true
-##true
-###!
-###!
-###!----------------------------------------------
-###4.4 Operador =!
-###!----------------------------------------------
-###!
-#a1 != a1
-false
-##false
-#a1 != a2
-true
-##true
-#a1 != a3
-true
-##true
-#a1 != c1
-true
-##true
-#a1 != c2
-true
-##true
-#a1 != c3
-true
-##true
-#a2 != a1
-true
-##true
-#a2 != a2
-false
-##false
-#a2 != a3
-true
-##true
-#a2 != c1
-true
-##true
-#a2 != c2
-true
-##true
-#a2 != c3
-true
-##true
-#a3 != a1
-true
-##true
-#a3 != a2
-true
-##true
-#a3 != a3
-false
-##false
-#a3 != c1
-true
-##true
-#a3 != c2
-true
-##true
-#a3 != c3
-true
-##true
-#c1 != a1
-true
-##true
-#c1 != a2
-true
-##true
-#c1 != a3
-true
-##true
-#c1 != c1
-false
-##false
-#c1 != c2
-true
-##true
-#c1 != c3
-true
-##true
-#c2 != a2
-true
-##true
-#c2 != a3
-true
-##true
-#c2 != c1
-true
+#c007 == c007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c2 != c2
-false
-##false
-#c2 != c3
-true
-##true
-#c3 != a1
-true
-##true
-#c3 != a2
-true
-##true
-#c3 != a3
-true
-##true
-#c3 != c1
-true
-##true
-#c3 != c2
-true
-##true
-#c3 != c3
-false
-##false
-###!
-###!
-###!----------------------------------------------
-###4.5 Operador <
-###!----------------------------------------------
-###!
-#a1 < a1
-false
-##false
-#a1 < a2
-true
-##true
-#a1 < a3
-true
-##true
-#a1 < c1
-true
-##true
-#a1 < c2
-true
-##true
-#a1 < c3
-true
-##true
-#a2 < a1
-false
-##false
-#a2 < a2
-false
-##false
-#a2 < a3
-true
-##true
-#a2 < c1
-true
-##true
-#a2 < c2
-true
-##true
-#a2 < c3
-true
-##true
-#a3 < a1
-false
-##false
-#a3 < a2
-false
-##false
-#a3 < a3
-false
-##false
-#a3 < c1
-true
-##true
-#a3 < c2
-true
-##true
-#a3 < c3
-true
-##true
-#c1 < a1
-false
-##false
-#c1 < a2
-false
-##false
-#c1 < a3
-false
-##false
-#c1 < c1
-false
+#c007 == c064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c1 < c2
-true
-##true
-#c1 < c3
-true
-##true
-#c2 < a1
-false
-##false
-#c2 < a2
-false
+#c007 == c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c2 < a3
-false
+#c007 == c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c2 < c1
-false
-##false
-#c2 < c2
-false
-##false
-#c2 < c3
-true
-##true
-#c3 < a1
-false
-##false
-#c3 < a2
-false
-##false
-#c3 < a3
-false
-##false
-#c3 < c1
-false
-##false
-#c3 < c2
-false
-##false
-#c3 < c3
-false
-##false
-###!
-###!
-###!----------------------------------------------
-###4.6 Operador <=
-###!----------------------------------------------
-###!
-#a1 <= a1
-true
-##true
-#a1 <= a2
-true
-##true
-#a1 <= a3
-true
-##true
-#a1 <= c1
-true
-##true
-#a1 <= c2
-true
-##true
-#a1 <= c3
-true
-##true
-#a2 <= a1
-false
-##false
-#a2 <= a2
-true
-##true
-#a2 <= a3
-true
-##true
-#a2 <= c1
-true
-##true
-#a2 <= c2
-true
-##true
-#a2 <= c3
-true
-##true
-#a3 <= a1
-false
+#c064 == c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 <= a2
-false
+#c064 == c007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 <= a3
-true
-##true
-#a3 <= c1
-true
-##true
-#a3 <= c2
-true
+#c064 == c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= c3
-true
-##true
-#c1 <= a1
-false
-##false
-#c1 <= a2
-false
-##false
-#c1 <= a3
-false
+#c064 == c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c1 <= c1
-true
-##true
-#c1 <= c2
-true
-##true
-#c1 <= c3
-true
-##true
-#c2 <= a1
-false
+#c064 == c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c2 <= a2
-false
+#c_100 == c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c2 <= a3
-false
+#c_100 == c007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c2 <= c1
-false
+#c_100 == c064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c2 <= c2
-true
-##true
-#c2 <= c3
-true
+#c_100 == c_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c3 <= a1
-false
+#c_100 == c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c3 <= a2
-false
+#c_1_1_1 == c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c3 <= a3
-false
+#c_1_1_1 == c007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c3 <= c1
-false
+#c_1_1_1 == c064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c3 <= c2
-false
+#c_1_1_1 == c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c3 <= c3
-true
+#c_1_1_1 == c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
 ###!----------------------------------------------
-###4.7 Operador >
+###4.5 Operador !=
 ###!----------------------------------------------
 ###!
-#a1 > a1
-false
+#c000 != c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 > a2
-false
-##false
-#a1 > a3
-false
-##false
-#a1 > c1
-false
-##false
-#a1 > c2
-false
-##false
-#a1 > c3
-false
-##false
-#a2 > a1
-true
+#c000 != c007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 > a2
-false
-##false
-#a2 > a3
-false
-##false
-#a2 > c1
-false
-##false
-#a2 > c2
-false
-##false
-#a2 > c3
-false
-##false
-#a3 > a1
-true
+#c000 != c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 > a2
-true
+#c000 != c_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 > a3
-false
+#c000 != c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 != c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 != c007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > c1
-false
+#c007 != c064
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 != c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 != c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 != c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 != c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 != c064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > c2
-false
+#c064 != c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 != c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 != c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 != c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 != c064
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 != c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > c3
-false
-##false
-#c1 > a1
-true
+#c_100 != c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c1 > a2
-true
+#c_1_1_1 != c000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c1 > a3
-true
+#c_1_1_1 != c007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c1 > c1
-false
-##false
-#c1 > c2
-false
-##false
-#c1 > c3
-false
-##false
-#c2 > a1
-true
+#c_1_1_1 != c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c2 > a2
-true
+#c_1_1_1 != c_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c2 > a3
-true
-##true
-#c2 > c1
-true
-##true
-#c2 > c2
-false
-##false
-#c2 > c3
-false
-##false
-#c3 > a1
-true
-##true
-#c3 > a2
-true
-##true
-#c3 > a3
-true
-##true
-#c3 > c1
-true
-##true
-#c3 > c2
-true
-##true
-#c3 > c3
-false
+#c_1_1_1 != c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
 ###!
 ###!
 ###!----------------------------------------------
-###4.8 Operador >=
+###4.6 Operador <
 ###!----------------------------------------------
 ###!
-#a1 >= a1
-true
-##true
-#a1 >= a2
-false
+#c000 < c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= a3
-false
+#c000 < c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c000 < c064
+Error::gen_driver:4:Objeto inexistente
+##true
+#c000 < c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= c1
-false
+#c000 < c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= c2
-false
+#c007 < c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= c3
-false
+#c007 < c007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= a1
-true
+#c007 < c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 >= a2
-true
-##true
-#a2 >= a3
-false
+#c007 < c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= c1
-false
+#c007 < c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= c2
-false
+#c064 < c000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= c3
-false
+#c064 < c007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 >= a1
-true
-##true
-#a3 >= a2
-true
-##true
-#a3 >= a3
-true
-##true
-#a3 >= c1
-false
+#c064 < c064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 >= c2
-false
+#c064 < c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 >= c3
-false
+#c064 < c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c1 >= a1
-true
+#c_100 < c000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c1 >= a2
-true
+#c_100 < c007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c1 >= a3
-true
+#c_100 < c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c1 >= c1
-true
-##true
-#c1 >= c2
-false
+#c_100 < c_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c1 >= c3
-false
+#c_100 < c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c2 >= a1
-true
+#c_1_1_1 < c000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c2 >= a2
-true
+#c_1_1_1 < c007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c2 >= a3
-true
+#c_1_1_1 < c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c2 >= c1
-true
+#c_1_1_1 < c_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c2 >= c2
-true
-##true
-#c2 >= c3
-false
+#c_1_1_1 < c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#c3 >= a1
-true
+###!
+###!
+###!----------------------------------------------
+###4.7 Operador <=
+###!----------------------------------------------
+###!
+#c000 <= c000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c3 >= a2
-true
+#c000 <= c007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c3 >= a3
-true
+#c000 <= c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c3 >= c1
-true
+#c000 <= c_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#c000 <= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#c007 <= c000
+Error::gen_driver:4:Objeto inexistente
+##false
+#c007 <= c007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c3 >= c2
-true
+#c007 <= c064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#c3 >= c3
-true
+#c007 <= c_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#c007 <= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#c064 <= c000
+Error::gen_driver:4:Objeto inexistente
+##false
+#c064 <= c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c064 <= c064
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 <= c_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#c064 <= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 <= c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 <= c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 <= c064
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 <= c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 <= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 <= c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_1_1_1 <= c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_1_1_1 <= c064
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_1_1_1 <= c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_1_1_1 <= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+###!
+###!
+###!----------------------------------------------
+###4.8 Operador >
+###!----------------------------------------------
+###!
+#c000 > c000
+Error::gen_driver:4:Objeto inexistente
+##false
+#c000 > c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c000 > c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c000 > c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c000 > c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 > c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 > c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c007 > c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c007 > c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 > c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 > c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 > c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 > c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c064 > c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 > c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 > c000
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 > c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 > c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 > c_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 > c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_1_1_1 > c000
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 > c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 > c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 > c_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 > c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+###!
+###!
+###!----------------------------------------------
+###4.9 Operador >=
+###!----------------------------------------------
+###!
+#c000 >= c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c000 >= c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c000 >= c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c000 >= c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c000 >= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 >= c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 >= c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 >= c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c007 >= c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c007 >= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 >= c000
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 >= c007
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 >= c064
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 >= c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c064 >= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 >= c000
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 >= c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 >= c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_100 >= c_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_100 >= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#c_1_1_1 >= c000
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 >= c007
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 >= c064
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 >= c_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#c_1_1_1 >= c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
@@ -1524,1538 +1172,580 @@ true
 ###5 Operador d'assignacio
 ###!----------------------------------------------
 ###!
-#init z1 contenidor Z1 30
-#init z2 contenidor Z1 10
-#init z3 contenidor Z1 20
-#init x1 contenidor X1 10
-#init x2 contenidor X1 20
-#init x3 contenidor X1 30
-#z1 = x1
-#z2 = x2
-#z3 = x3
+#init x000 ubicacio 1 2 3
+Error::gen_driver:2:Num. argumentos incorrecto
+#init x007 ubicacio 4 5 6
+Error::gen_driver:2:Num. argumentos incorrecto
+#init x064 ubicacio 6 7 8
+Error::gen_driver:2:Num. argumentos incorrecto
+#init x_100 ubicacio 9 10 11
+Error::gen_driver:2:Num. argumentos incorrecto
+#init x_1_1_1 ubicacio 12 13 14
+Error::gen_driver:2:Num. argumentos incorrecto
 ###!
 ###!
-###!----------------------------------------------
-###5.1 Matricula
-###!----------------------------------------------
+###!------------------------------------------------------------------
+###5.1 Filera
+###!------------------------------------------------------------------
 ###!
-#z1 matricula
-X1
-##X1
-#z2 matricula
-X1
-##X1
-#z3 matricula
-X1
-##X1
+#x000 filera
+Error::gen_driver:1:Operacion incorrecta
+##1
+#x007 filera
+Error::gen_driver:1:Operacion incorrecta
+##4
+#x064 filera
+Error::gen_driver:1:Operacion incorrecta
+##6
+#x_100 filera
+Error::gen_driver:1:Operacion incorrecta
+##9
+#x_1_1_1 filera
+Error::gen_driver:1:Operacion incorrecta
+##12
 ###!
 ###!
-###!----------------------------------------------
-###5.2 Longitud
-###!----------------------------------------------
+###!------------------------------------------------------------------
+###5.2 Placa
+###!------------------------------------------------------------------
 ###!
-#z1 longitud
-10
+#x000 placa
+Error::gen_driver:1:Operacion incorrecta
+##2
+#x007 placa
+Error::gen_driver:1:Operacion incorrecta
+##5
+#x064 placa
+Error::gen_driver:1:Operacion incorrecta
+##7
+#x_100 placa
+Error::gen_driver:1:Operacion incorrecta
 ##10
-#z2 longitud
-20
-##20
-#z3 longitud
-30
-##30
+#x_1_1_1 placa
+Error::gen_driver:1:Operacion incorrecta
+##13
+###!
+###!
+###!------------------------------------------------------------------
+###5.3 Pis
+###!------------------------------------------------------------------
+###!
+#x000 pis
+Error::gen_driver:1:Operacion incorrecta
+##3
+#x007 pis
+Error::gen_driver:1:Operacion incorrecta
+##6
+#x064 pis
+Error::gen_driver:1:Operacion incorrecta
+##8
+#x_100 pis
+Error::gen_driver:1:Operacion incorrecta
+##11
+#x_1_1_1 pis
+Error::gen_driver:1:Operacion incorrecta
+##14
+###!
+###!
+###!------------------------------------------------------------------
+###5.4 Assignacio
+###!------------------------------------------------------------------
+###!
+#x000 = c000
+Error::gen_driver:4:Objeto inexistente
+#x007 = c007
+Error::gen_driver:4:Objeto inexistente
+#x064 = c064
+Error::gen_driver:4:Objeto inexistente
+#x_100 = c_100
+Error::gen_driver:4:Objeto inexistente
+#x_1_1_1 = c_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ###!
 ###!
 ###!----------------------------------------------
-###5.3 Operador ==
+###5.5 Operador ==
 ###!----------------------------------------------
 ###!
-#a1 == a1
-true
+#x000 == x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 == a2
-false
+#x000 == x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == a3
-false
+#x000 == x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == b1
-false
+#x000 == x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == b2
-false
+#x000 == x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == b3
-false
+#x007 == x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 == z1
-false
-##false
-#a1 == z2
-false
-##false
-#a1 == z3
-false
-##false
-#a2 == a1
-false
-##false
-#a2 == a2
-true
+#x007 == x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 == a3
-false
+#x007 == x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == b1
-false
+#x007 == x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == b2
-false
+#x007 == x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == b3
-false
+#x064 == x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == z1
-false
+#x064 == x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 == z2
-false
-##false
-#a2 == z3
-false
-##false
-#a3 == a1
-false
-##false
-#a3 == a2
-false
-##false
-#a3 == a3
-true
+#x064 == x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 == b1
-false
+#x064 == x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == b2
-false
+#x064 == x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == b3
-false
+#x_100 == x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == z1
-false
+#x_100 == x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == z2
-false
+#x_100 == x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 == z3
-false
-##false
-#b1 == a1
-false
-##false
-#b1 == a2
-false
-##false
-#b1 == a3
-false
-##false
-#b1 == b1
-true
+#x_100 == x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 == b2
-false
+#x_100 == x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == b3
-false
+#x_1_1_1 == x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == z1
-false
+#x_1_1_1 == x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == z2
-false
+#x_1_1_1 == x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 == z3
-false
+#x_1_1_1 == x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b2 == a1
-false
-##false
-#b2 == a2
-false
-##false
-#b2 == a3
-false
-##false
-#b2 == b1
-false
-##false
-#b2 == b2
-true
-##true
-#b2 == b3
-false
-##false
-#b2 == z1
-false
-##false
-#b2 == z2
-false
-##false
-#b2 == z3
-false
-##false
-#b3 == a1
-false
-##false
-#b3 == a2
-false
-##false
-#b3 == a3
-false
-##false
-#b3 == b1
-false
-##false
-#b3 == b2
-false
-##false
-#b3 == b3
-true
-##true
-#b3 == z1
-false
-##false
-#b3 == z2
-false
-##false
-#b3 == z3
-false
-##false
-#z1 == a1
-false
-##false
-#z1 == a2
-false
-##false
-#z1 == a3
-false
-##false
-#z1 == b1
-false
-##false
-#z1 == b2
-false
-##false
-#z1 == b3
-false
-##false
-#z1 == z1
-true
-##true
-#z1 == z2
-false
-##false
-#z1 == z3
-false
-##false
-#z2 == a1
-false
-##false
-#z2 == a2
-false
-##false
-#z2 == a3
-false
-##false
-#z2 == b1
-false
-##false
-#z2 == b2
-false
-##false
-#z2 == b3
-false
-##false
-#z2 == z1
-false
-##false
-#z2 == z2
-true
-##true
-#z2 == z3
-false
-##false
-#z3 == a1
-false
-##false
-#z3 == a2
-false
-##false
-#z3 == a3
-false
-##false
-#z3 == b1
-false
-##false
-#z3 == b2
-false
-##false
-#z3 == b3
-false
-##false
-#z3 == z1
-false
-##false
-#z3 == z2
-false
-##false
-#z3 == z3
-true
+#x_1_1_1 == x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
 ###!----------------------------------------------
-###5.4 Operador =!
+###5.6 Operador !=
 ###!----------------------------------------------
 ###!
-#a1 != a1
-false
+#x000 != x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 != a2
-true
+#x000 != x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != a3
-true
+#x000 != x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != b1
-true
+#x000 != x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != b2
-true
+#x000 != x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != b3
-true
+#x007 != x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 != z1
-true
-##true
-#a1 != z2
-true
-##true
-#a1 != z3
-true
-##true
-#a2 != a1
-true
-##true
-#a2 != a2
-false
+#x007 != x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 != a3
-true
+#x007 != x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != b1
-true
+#x007 != x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != b2
-true
+#x007 != x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != b3
-true
+#x064 != x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != z1
-true
+#x064 != x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 != z2
-true
-##true
-#a2 != z3
-true
-##true
-#a3 != a1
-true
-##true
-#a3 != a2
-true
-##true
-#a3 != a3
-false
+#x064 != x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 != b1
-true
+#x064 != x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != b2
-true
+#x064 != x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != b3
-true
+#x_100 != x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != z1
-true
+#x_100 != x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != z2
-true
+#x_100 != x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 != z3
-true
-##true
-#b1 != a1
-true
-##true
-#b1 != a2
-true
-##true
-#b1 != a3
-true
-##true
-#b1 != b1
-false
+#x_100 != x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 != b2
-true
+#x_100 != x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != b3
-true
+#x_1_1_1 != x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != z1
-true
+#x_1_1_1 != x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != z2
-true
+#x_1_1_1 != x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 != z3
-true
+#x_1_1_1 != x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b2 != a1
-true
-##true
-#b2 != a2
-true
-##true
-#b2 != a3
-true
-##true
-#b2 != b1
-true
-##true
-#b2 != b2
-false
-##false
-#b2 != b3
-true
-##true
-#b2 != z1
-true
-##true
-#b2 != z2
-true
-##true
-#b2 != z3
-true
-##true
-#b3 != a1
-true
-##true
-#b3 != a2
-true
-##true
-#b3 != a3
-true
-##true
-#b3 != b1
-true
-##true
-#b3 != b2
-true
-##true
-#b3 != b3
-false
-##false
-#b3 != z1
-true
-##true
-#b3 != z2
-true
-##true
-#b3 != z3
-true
-##true
-#z1 != a1
-true
-##true
-#z1 != a2
-true
-##true
-#z1 != a3
-true
-##true
-#z1 != b1
-true
-##true
-#z1 != b2
-true
-##true
-#z1 != b3
-true
-##true
-#z1 != z1
-false
-##false
-#z1 != z2
-true
-##true
-#z1 != z3
-true
-##true
-#z2 != a1
-true
-##true
-#z2 != a2
-true
-##true
-#z2 != a3
-true
-##true
-#z2 != b1
-true
-##true
-#z2 != b2
-true
-##true
-#z2 != b3
-true
-##true
-#z2 != z1
-true
-##true
-#z2 != z2
-false
-##false
-#z2 != z3
-true
-##true
-#z3 != a1
-true
-##true
-#z3 != a2
-true
-##true
-#z3 != a3
-true
-##true
-#z3 != b1
-true
-##true
-#z3 != b2
-true
-##true
-#z3 != b3
-true
-##true
-#z3 != z1
-true
-##true
-#z3 != z2
-true
-##true
-#z3 != z3
-false
+#x_1_1_1 != x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
 ###!
 ###!
 ###!----------------------------------------------
-###5.5 Operador <
+###5.7 Operador <
 ###!----------------------------------------------
 ###!
-#a1 < a1
-false
+#x000 < x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 < a2
-true
+#x000 < x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < a3
-true
+#x000 < x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < b1
-true
+#x000 < x_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#x000 < x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#x007 < x000
+Error::gen_driver:4:Objeto inexistente
+##false
+#x007 < x007
+Error::gen_driver:4:Objeto inexistente
+##false
+#x007 < x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < b2
-true
+#x007 < x_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#x007 < x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 < x000
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 < x007
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 < x064
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 < x_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 < x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#x_100 < x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < b3
-true
+#x_100 < x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < z1
-true
+#x_100 < x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < z2
-true
+#x_100 < x_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#x_100 < x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#x_1_1_1 < x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 < z3
-true
+#x_1_1_1 < x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 < a1
-false
-##false
-#a2 < a2
-false
-##false
-#a2 < a3
-true
+#x_1_1_1 < x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 < b1
-true
+#x_1_1_1 < x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 < b2
-true
-##true
-#a2 < b3
-true
-##true
-#a2 < z1
-true
-##true
-#a2 < z2
-true
-##true
-#a2 < z3
-true
-##true
-#a3 < a1
-false
-##false
-#a3 < a2
-false
-##false
-#a3 < a3
-false
-##false
-#a3 < b1
-true
-##true
-#a3 < b2
-true
-##true
-#a3 < b3
-true
-##true
-#a3 < z1
-true
-##true
-#a3 < z2
-true
-##true
-#a3 < z3
-true
-##true
-#b1 < a1
-false
-##false
-#b1 < a2
-false
-##false
-#b1 < a3
-false
-##false
-#b1 < b1
-false
-##false
-#b1 < b2
-true
-##true
-#b1 < b3
-true
-##true
-#b1 < z1
-true
-##true
-#b1 < z2
-true
-##true
-#b1 < z3
-true
-##true
-#b2 < a1
-false
-##false
-#b2 < a2
-false
-##false
-#b2 < a3
-false
-##false
-#b2 < b1
-false
-##false
-#b2 < b2
-false
-##false
-#b2 < b3
-true
-##true
-#b2 < z1
-true
-##true
-#b2 < z2
-true
-##true
-#b2 < z3
-true
-##true
-#b3 < a1
-false
-##false
-#b3 < a2
-false
-##false
-#b3 < a3
-false
-##false
-#b3 < b1
-false
-##false
-#b3 < b2
-false
-##false
-#b3 < b3
-false
-##false
-#b3 < z1
-true
-##true
-#b3 < z2
-true
-##true
-#b3 < z3
-true
-##true
-#z1 < a1
-false
-##false
-#z1 < a2
-false
-##false
-#z1 < a3
-false
-##false
-#z1 < b1
-false
-##false
-#z1 < b2
-false
-##false
-#z1 < b3
-false
-##false
-#z1 < z1
-false
-##false
-#z1 < z2
-true
-##true
-#z1 < z3
-true
-##true
-#z2 < a1
-false
-##false
-#z2 < a2
-false
-##false
-#z2 < a3
-false
-##false
-#z2 < b1
-false
-##false
-#z2 < b2
-false
-##false
-#z2 < b3
-false
-##false
-#z2 < z1
-false
-##false
-#z2 < z2
-false
-##false
-#z2 < z3
-true
-##true
-#z3 < a1
-false
-##false
-#z3 < a2
-false
-##false
-#z3 < a3
-false
-##false
-#z3 < b1
-false
-##false
-#z3 < b2
-false
-##false
-#z3 < b3
-false
-##false
-#z3 < z1
-false
-##false
-#z3 < z2
-false
-##false
-#z3 < z3
-false
+#x_1_1_1 < x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
 ###!
 ###!
 ###!----------------------------------------------
-###5.6 Operador <=
+###5.8 Operador <=
 ###!----------------------------------------------
 ###!
-#a1 <= a1
-true
+#x000 <= x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 <= a2
-true
+#x000 <= x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 <= a3
-true
+#x000 <= x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 <= b1
-true
-##true
-#a1 <= b2
-true
-##true
-#a1 <= b3
-true
-##true
-#a1 <= z1
-true
-##true
-#a1 <= z2
-true
-##true
-#a1 <= z3
-true
-##true
-#a2 <= a1
-false
+#x000 <= x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 <= a2
-true
-##true
-#a2 <= a3
-true
-##true
-#a2 <= b1
-true
-##true
-#a2 <= b2
-true
-##true
-#a2 <= b3
-true
-##true
-#a2 <= z1
-true
-##true
-#a2 <= z2
-true
-##true
-#a2 <= z3
-true
-##true
-#a3 <= a1
-false
+#x000 <= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 <= a2
-false
+#x007 <= x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 <= a3
-true
+#x007 <= x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= b1
-true
+#x007 <= x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= b2
-true
+#x007 <= x_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#x007 <= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 <= x000
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 <= x007
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 <= x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= b3
-true
+#x064 <= x_100
+Error::gen_driver:4:Objeto inexistente
+##false
+#x064 <= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##false
+#x_100 <= x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= z1
-true
+#x_100 <= x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= z2
-true
+#x_100 <= x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 <= z3
-true
+#x_100 <= x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= a1
-false
+#x_100 <= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 <= a2
-false
-##false
-#b1 <= a3
-false
-##false
-#b1 <= b1
-true
+#x_1_1_1 <= x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= b2
-true
+#x_1_1_1 <= x007
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= b3
-true
+#x_1_1_1 <= x064
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= z1
-true
+#x_1_1_1 <= x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 <= z2
-true
-##true
-#b1 <= z3
-true
-##true
-#b2 <= a1
-false
-##false
-#b2 <= a2
-false
-##false
-#b2 <= a3
-false
-##false
-#b2 <= b1
-false
-##false
-#b2 <= b2
-true
-##true
-#b2 <= b3
-true
-##true
-#b2 <= z1
-true
-##true
-#b2 <= z2
-true
-##true
-#b2 <= z3
-true
-##true
-#b3 <= a1
-false
-##false
-#b3 <= a2
-false
-##false
-#b3 <= a3
-false
-##false
-#b3 <= b1
-false
-##false
-#b3 <= b2
-false
-##false
-#b3 <= b3
-true
-##true
-#b3 <= z1
-true
-##true
-#b3 <= z2
-true
-##true
-#b3 <= z3
-true
-##true
-#z1 <= a1
-false
-##false
-#z1 <= a2
-false
-##false
-#z1 <= a3
-false
-##false
-#z1 <= b1
-false
-##false
-#z1 <= b2
-false
-##false
-#z1 <= b3
-false
-##false
-#z1 <= z1
-true
-##true
-#z1 <= z2
-true
-##true
-#z1 <= z3
-true
-##true
-#z2 <= a1
-false
-##false
-#z2 <= a2
-false
-##false
-#z2 <= a3
-false
-##false
-#z2 <= b1
-false
-##false
-#z2 <= b2
-false
-##false
-#z2 <= b3
-false
-##false
-#z2 <= z1
-false
-##false
-#z2 <= z2
-true
-##true
-#z2 <= z3
-true
-##true
-#z3 <= a1
-false
-##false
-#z3 <= a2
-false
-##false
-#z3 <= a3
-false
-##false
-#z3 <= b1
-false
-##false
-#z3 <= b2
-false
-##false
-#z3 <= b3
-false
-##false
-#z3 <= z1
-false
-##false
-#z3 <= z2
-false
-##false
-#z3 <= z3
-true
+#x_1_1_1 <= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
 ###!----------------------------------------------
-###5.7 Operador >
+###5.9 Operador >
 ###!----------------------------------------------
 ###!
-#a1 > a1
-false
+#x000 > x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 > a2
-false
+#x000 > x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 > a3
-false
+#x000 > x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 > b1
-false
-##false
-#a1 > b2
-false
-##false
-#a1 > b3
-false
-##false
-#a1 > z1
-false
-##false
-#a1 > z2
-false
-##false
-#a1 > z3
-false
-##false
-#a2 > a1
-true
+#x000 > x_100
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a2 > a2
-false
-##false
-#a2 > a3
-false
-##false
-#a2 > b1
-false
-##false
-#a2 > b2
-false
-##false
-#a2 > b3
-false
-##false
-#a2 > z1
-false
-##false
-#a2 > z2
-false
-##false
-#a2 > z3
-false
-##false
-#a3 > a1
-true
+#x000 > x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 > a2
-true
+#x007 > x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a3 > a3
-false
+#x007 > x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > b1
-false
+#x007 > x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > b2
-false
+#x007 > x_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#x007 > x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 > x000
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 > x007
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 > x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > b3
-false
+#x064 > x_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 > x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#x_100 > x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > z1
-false
+#x_100 > x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > z2
-false
+#x_100 > x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a3 > z3
-false
+#x_100 > x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > a1
-true
+#x_100 > x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
-#b1 > a2
-true
-##true
-#b1 > a3
-true
-##true
-#b1 > b1
-false
+#x_1_1_1 > x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > b2
-false
+#x_1_1_1 > x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > b3
-false
+#x_1_1_1 > x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > z1
-false
+#x_1_1_1 > x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#b1 > z2
-false
-##false
-#b1 > z3
-false
-##false
-#b2 > a1
-true
-##true
-#b2 > a2
-true
-##true
-#b2 > a3
-true
-##true
-#b2 > b1
-true
-##true
-#b2 > b2
-false
-##false
-#b2 > b3
-false
-##false
-#b2 > z1
-false
-##false
-#b2 > z2
-false
-##false
-#b2 > z3
-false
-##false
-#b3 > a1
-true
-##true
-#b3 > a2
-true
-##true
-#b3 > a3
-true
-##true
-#b3 > b1
-true
-##true
-#b3 > b2
-true
-##true
-#b3 > b3
-false
-##false
-#b3 > z1
-false
-##false
-#b3 > z2
-false
-##false
-#b3 > z3
-false
-##false
-#z1 > a1
-true
-##true
-#z1 > a2
-true
-##true
-#z1 > a3
-true
-##true
-#z1 > b1
-true
-##true
-#z1 > b2
-true
-##true
-#z1 > b3
-true
-##true
-#z1 > z1
-false
-##false
-#z1 > z2
-false
-##false
-#z1 > z3
-false
-##false
-#z2 > a1
-true
-##true
-#z2 > a2
-true
-##true
-#z2 > a3
-true
-##true
-#z2 > b1
-true
-##true
-#z2 > b2
-true
-##true
-#z2 > b3
-true
-##true
-#z2 > z1
-true
-##true
-#z2 > z2
-false
-##false
-#z2 > z3
-false
-##false
-#z3 > a1
-true
-##true
-#z3 > a2
-true
-##true
-#z3 > a3
-true
-##true
-#z3 > b1
-true
-##true
-#z3 > b2
-true
-##true
-#z3 > b3
-true
-##true
-#z3 > z1
-true
-##true
-#z3 > z2
-true
-##true
-#z3 > z3
-false
+#x_1_1_1 > x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##false
 ###!
 ###!
 ###!----------------------------------------------
-###5.8 Operador >=
+###5.10 Operador >=
 ###!----------------------------------------------
 ###!
-#a1 >= a1
-true
+#x000 >= x000
+Error::gen_driver:4:Objeto inexistente
 ##true
-#a1 >= a2
-false
+#x000 >= x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= a3
-false
+#x000 >= x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= b1
-false
+#x000 >= x_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#x000 >= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#x007 >= x000
+Error::gen_driver:4:Objeto inexistente
+##true
+#x007 >= x007
+Error::gen_driver:4:Objeto inexistente
+##true
+#x007 >= x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= b2
-false
+#x007 >= x_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#x007 >= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 >= x000
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 >= x007
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 >= x064
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 >= x_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#x064 >= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#x_100 >= x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= b3
-false
+#x_100 >= x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= z1
-false
+#x_100 >= x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= z2
-false
+#x_100 >= x_100
+Error::gen_driver:4:Objeto inexistente
+##true
+#x_100 >= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
+##true
+#x_1_1_1 >= x000
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a1 >= z3
-false
+#x_1_1_1 >= x007
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= a1
-true
-##true
-#a2 >= a2
-true
-##true
-#a2 >= a3
-false
+#x_1_1_1 >= x064
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= b1
-false
+#x_1_1_1 >= x_100
+Error::gen_driver:4:Objeto inexistente
 ##false
-#a2 >= b2
-false
-##false
-#a2 >= b3
-false
-##false
-#a2 >= z1
-false
-##false
-#a2 >= z2
-false
-##false
-#a2 >= z3
-false
-##false
-#a3 >= a1
-true
-##true
-#a3 >= a2
-true
-##true
-#a3 >= a3
-true
-##true
-#a3 >= b1
-false
-##false
-#a3 >= b2
-false
-##false
-#a3 >= b3
-false
-##false
-#a3 >= z1
-false
-##false
-#a3 >= z2
-false
-##false
-#a3 >= z3
-false
-##false
-#b1 >= a1
-true
-##true
-#b1 >= a2
-true
-##true
-#b1 >= a3
-true
-##true
-#b1 >= b1
-true
-##true
-#b1 >= b2
-false
-##false
-#b1 >= b3
-false
-##false
-#b1 >= z1
-false
-##false
-#b1 >= z2
-false
-##false
-#b1 >= z3
-false
-##false
-#b2 >= a1
-true
-##true
-#b2 >= a2
-true
-##true
-#b2 >= a3
-true
-##true
-#b2 >= b1
-true
-##true
-#b2 >= b2
-true
-##true
-#b2 >= b3
-false
-##false
-#b2 >= z1
-false
-##false
-#b2 >= z2
-false
-##false
-#b2 >= z3
-false
-##false
-#b3 >= a1
-true
-##true
-#b3 >= a2
-true
-##true
-#b3 >= a3
-true
-##true
-#b3 >= b1
-true
-##true
-#b3 >= b2
-true
-##true
-#b3 >= b3
-true
-##true
-#b3 >= z1
-false
-##false
-#b3 >= z2
-false
-##false
-#b3 >= z3
-false
-##false
-#z1 >= a1
-true
-##true
-#z1 >= a2
-true
-##true
-#z1 >= a3
-true
-##true
-#z1 >= b1
-true
-##true
-#z1 >= b2
-true
-##true
-#z1 >= b3
-true
-##true
-#z1 >= z1
-true
-##true
-#z1 >= z2
-false
-##false
-#z1 >= z3
-false
-##false
-#z2 >= a1
-true
-##true
-#z2 >= a2
-true
-##true
-#z2 >= a3
-true
-##true
-#z2 >= b1
-true
-##true
-#z2 >= b2
-true
-##true
-#z2 >= b3
-true
-##true
-#z2 >= z1
-true
-##true
-#z2 >= z2
-true
-##true
-#z2 >= z3
-false
-##false
-#z3 >= a1
-true
-##true
-#z3 >= a2
-true
-##true
-#z3 >= a3
-true
-##true
-#z3 >= b1
-true
-##true
-#z3 >= b2
-true
-##true
-#z3 >= b3
-true
-##true
-#z3 >= z1
-true
-##true
-#z3 >= z2
-true
-##true
-#z3 >= z3
-true
+#x_1_1_1 >= x_1_1_1
+Error::gen_driver:4:Objeto inexistente
 ##true
 ###!
 ###!
@@ -3064,19 +1754,33 @@ true
 ###6 Destructora
 ###!----------------------------------------------
 ###!
-#a1 destroy
-#a2 destroy
-#a3 destroy
-#b1 destroy
-#b2 destroy
-#b3 destroy
-#c1 destroy
-#c2 destroy
-#c3 destroy
-#x1 destroy
-#x2 destroy
-#x3 destroy
-#z1 destroy
-#z2 destroy
-#z3 destroy
-###!
+#u000 destroy
+Error::gen_driver:4:Objeto inexistente
+#u007 destroy
+Error::gen_driver:4:Objeto inexistente
+#u064 destroy
+Error::gen_driver:4:Objeto inexistente
+#u_100 destroy
+Error::gen_driver:4:Objeto inexistente
+#u_1_1_1 destroy
+Error::gen_driver:4:Objeto inexistente
+#c000 destroy
+Error::gen_driver:4:Objeto inexistente
+#c007 destroy
+Error::gen_driver:4:Objeto inexistente
+#c064 destroy
+Error::gen_driver:4:Objeto inexistente
+#c_100 destroy
+Error::gen_driver:4:Objeto inexistente
+#c_1_1_1 destroy
+Error::gen_driver:4:Objeto inexistente
+#x000 destroy
+Error::gen_driver:4:Objeto inexistente
+#x007 destroy
+Error::gen_driver:4:Objeto inexistente
+#x064 destroy
+Error::gen_driver:4:Objeto inexistente
+#x_100 destroy
+Error::gen_driver:4:Objeto inexistente
+#x_1_1_1 destroy
+Error::gen_driver:4:Objeto inexistente

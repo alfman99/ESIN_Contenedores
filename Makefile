@@ -1,4 +1,4 @@
-OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O0 -Wno-sign-compare -Wall -Wextra -std=c++11 -g
+OPCIONS = -O0 -Wno-sign-compare -Wall -Wextra -std=c++11 -g
 
 program.exe: driver_gestterm.o ubicacio.o contenidor.o terminal.o
 	g++ -o program.exe driver_gestterm.o ubicacio.o contenidor.o terminal.o -lesin
