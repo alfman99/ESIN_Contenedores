@@ -10,3 +10,10 @@ g++ -c -Wall -Wno-deprecated contenidor.cpp
 g++ -c -Wall -Wno-deprecated driver_contenidor.cpp
 g++ -o program.e contenidor.o driver_contenidor.o -lesin
 ./program.e < jocsProba/jp_public_contenidor.in > outputs/contenidor.out
+
+
+// cataleg
+g++ -c -Wall -Wno-deprecated cataleg.t
+g++ -c -Wall -Wno-deprecated driver_cataleg.cpp
+g++ -o program.e driver_cataleg.o -lesin
+./program.e < jocsProba/jp_public_cataleg.in > outputs/cataleg.out
