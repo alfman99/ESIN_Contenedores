@@ -21,15 +21,15 @@ cataleg<Valor>::cataleg(const cataleg& c) throw(error) {
     this->_taula = new node_hash*[c._M];
 
     for(unsigned int i = 0; i < _M; i++) {
-        if (c._taula[i]) {
+        if (c._taula[i] != NULL) {
             node_hash* aux = c._taula[i];
-            while (aux) {
+            while (aux != NULL) {
                 try {
                     node_hash* newNode = new node_hash;
                     newNode->_k = aux->_k;
                     newNode->_v = aux->_v;
                     newNode->_seg = this->_taula[i];
-                    _taula[i] = aux;
+                    this->_taula[i] = aux;
                     aux = aux->_seg;
                 }
                 catch(error) {
@@ -50,11 +50,10 @@ cataleg<Valor>::cataleg(const cataleg& c) throw(error) {
 
 template<typename Valor>
 cataleg<Valor>& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
-
-    cataleg<Valor> aux(c);
-
+    if(this != &c){
+        cataleg<Valor> aux(c); 
+    }
     return *this;
-
 }
 
 template<typename Valor>
@@ -83,8 +82,8 @@ void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
         throw error(ClauStringBuit);
     }
     else {
-        util::Hash<string> hashFunction;
-        unsigned long i = hashFunction(k);
+    
+        unsigned long i = util::hash(k);
 
         node_hash *p = this->_taula[i];
 
@@ -121,8 +120,8 @@ void cataleg<Valor>::elimina(const string &k) throw(error) {
         throw error(ClauStringBuit);
     }
     else {
-        util::Hash<string> hashFunction;
-        unsigned long i = hashFunction(k);
+        
+        unsigned long i = util::hash(k);
 
         node_hash *p = this->_taula[i], *ant = NULL;
 
@@ -159,8 +158,7 @@ bool cataleg<Valor>::existeix(const string &k) const throw() {
         throw error(ClauStringBuit);
     }
     else {
-        util::Hash<string> hashFunction;
-        unsigned long i = hashFunction(k);
+        unsigned long i = util::hash(k);
 
         node_hash *p = this->_taula[i];
 
@@ -177,6 +175,7 @@ bool cataleg<Valor>::existeix(const string &k) const throw() {
 
         return trobat;
     }
+    return false;
 }
 
 /* Retorna el valor associat a la clau k; si no existeix cap parell amb
@@ -189,8 +188,8 @@ Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
 
     Valor returnVal;
 
-    util::Hash<string> hashFunction;
-    unsigned long i = hashFunction(k);
+    unsigned long i = util::hash(k);
+    std::cout<<i;
     node_hash* p = _taula[i];
     bool trobat = false;
     while (p != NULL && !trobat) {
