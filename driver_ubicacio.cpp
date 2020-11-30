@@ -21,7 +21,7 @@ ostream& operator<<(ostream& os, const ubicacio& u) {
 
 // funcions d'utilitat
 
-// imprimeix un booleà
+// imprimeix un boole�
 ostream& operator<=(ostream& os, const bool b) {
   os << (b ? "true" : "false");
   return os;
@@ -64,13 +64,11 @@ void* user_init(gen_driver& dr) {
 		  gen_driver::WrongNumArgsMsg);
     }
   }
-
   throw error(gen_driver::WrongTypeArgs,gen_driver::nom_mod,
 	      gen_driver::WrongTypeArgsMsg);
 }
 
 /* TypeTraits */
-
 template <> const char* TypeTraits<ubicacio>::name = "ubicacio";
 
 /*-------------------------< UBICACIO >---------------------------*/
@@ -170,6 +168,16 @@ int main(){
   d.add_call("filera", tracta_filera, "ubicacio");
   d.add_call("placa", tracta_placa, "ubicacio");
   d.add_call("pis", tracta_pis, "ubicacio");
+
+  //operadors relacionals
+  d.add_call("<", tracta_menor, "any", "any");
+  d.add_call(">", tracta_major, "any", "any");
+  d.add_call("==", tracta_igual, "any", "any");
+  d.add_call("!=", tracta_no_igual, "any", "any");
+  d.add_call("<=", tracta_menor_igual, "any", "any");
+  d.add_call(">=", tracta_major_igual, "any", "any");
+
+  d.install_type<ubicacio>();
 
   d.go();
 }
