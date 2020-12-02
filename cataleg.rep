@@ -3,6 +3,7 @@ struct node_hash {
     string _k;
     Valor _v;
     node_hash* _seg;
+    node_hash(const string& key, const Valor& valor, node_hash* seg = NULL) throw(error) : _k(key), _v(valor), _seg(seg) {}
 };
 
 node_hash** _taula;

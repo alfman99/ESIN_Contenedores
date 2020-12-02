@@ -5,11 +5,11 @@
 /* Constructora. Crea un catàleg buit on numelems és el nombre
     aproximat d'elements que com a màxim s'inseriran al catàleg. */
 template<typename Valor>
-cataleg<Valor>::cataleg(nat numelems) throw(error) {
+cataleg<Valor>::cataleg(nat numelems) throw(error) : _quants(0) {
     this->_M = numelems;
     this->_taula = new node_hash*[numelems];
     this->_quants = 0;
-    for (unsigned int i = 0; i < _M; i++){
+    for (unsigned int i = 0; i < this->_M; i++){
         this->_taula[i] = NULL;
     }
 }
@@ -25,11 +25,8 @@ cataleg<Valor>::cataleg(const cataleg& c) throw(error) {
             node_hash* aux = c._taula[i];
             while (aux != NULL) {
                 try {
-                    node_hash* newNode = new node_hash;
-                    newNode->_k = aux->_k;
-                    newNode->_v = aux->_v;
-                    newNode->_seg = this->_taula[i];
-                    this->_taula[i] = aux;
+                    node_hash* newNode = new node_hash(aux->_k, aux->_v, this->_taula[i]);
+                    this->_taula[i] = newNode;
                     aux = aux->_seg;
                 }
                 catch(error) {
@@ -58,19 +55,18 @@ cataleg<Valor>& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
 
 template<typename Valor>
 cataleg<Valor>::~cataleg() throw() {
-node_hash* actual;
-node_hash* seguent;
-this->_quants = 0;
-for(unsigned int i = 0; i < this->_M ; i++ ){
-    actual = _taula[i];
-    while(actual != NULL){
-        seguent = actual->_seg;
-        delete actual;
-        actual = seguent;
+    node_hash* actual;
+    node_hash* seguent;
+    this->_quants = 0;
+    for(unsigned int i = 0; i < this->_M ; i++ ){
+        actual = _taula[i];
+        while(actual != NULL){
+            seguent = actual->_seg;
+            delete actual;
+            actual = seguent;
+        }
     }
-}
-delete[] this->_taula;
-
+    delete[] this->_taula;
 }
 
 /* Mètode modificador. Insereix el parell <clau, valor> indicat.
@@ -82,9 +78,8 @@ void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
         throw error(ClauStringBuit);
     }
     else {
-    
         util::Hash<string> h;
-        unsigned long i = h(k);
+        int i = h(k)%this->_M;
 
         node_hash *p = this->_taula[i];
 
@@ -103,11 +98,7 @@ void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
             p->_v = v;
         }
         else {
-            node_hash* aux = new node_hash;
-            aux->_k = k;
-            aux->_v = v;
-            aux->_seg = this->_taula[i];
-            this->_taula[i] = aux;
+            this->_taula[i] = new node_hash(k, v, this->_taula[i]);
             this->_quants++;
         }
     }
@@ -120,10 +111,13 @@ void cataleg<Valor>::elimina(const string &k) throw(error) {
     if (k.empty()) {
         throw error(ClauStringBuit);
     }
+    if (this->_quants == 0) {
+        throw error(ClauInexistent);
+    }
     else {
         
         util::Hash<string> h;
-        unsigned long i = h(k);
+        int i = h(k)%this->_M;
 
         node_hash *p = this->_taula[i], *ant = NULL;
 
@@ -159,9 +153,13 @@ bool cataleg<Valor>::existeix(const string &k) const throw() {
     if (k.empty()) {
         throw error(ClauStringBuit);
     }
+    else if (this->_quants == 0) {
+        return false;
+    }
     else {
+        
         util::Hash<string> h;
-        unsigned long i = h(k);
+        int i = h(k)%this->_M;
 
         node_hash *p = this->_taula[i];
 
@@ -189,13 +187,16 @@ bool cataleg<Valor>::existeix(const string &k) const throw() {
 template<typename Valor>
 Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
 
+    if (this->_quants == 0) {
+        throw error(ClauInexistent);
+    }
+
     Valor returnVal;
 
     util::Hash<string> h;
-    unsigned long i = h(k);
+    int i = h(k)%this->_M;
 
-    std::cout<<i;
-    node_hash* p = _taula[i];
+    node_hash* p = this->_taula[i];
     bool trobat = false;
     while (p != NULL && !trobat) {
         if (p->_k == k) {
