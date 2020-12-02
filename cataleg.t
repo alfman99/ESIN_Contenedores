@@ -83,7 +83,8 @@ void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
     }
     else {
     
-        unsigned long i = util::hash(k);
+        util::Hash<string> h;
+        unsigned long i = h(k);
 
         node_hash *p = this->_taula[i];
 
@@ -107,7 +108,7 @@ void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
             aux->_v = v;
             aux->_seg = this->_taula[i];
             this->_taula[i] = aux;
-            this->_quants--;
+            this->_quants++;
         }
     }
 }
@@ -121,7 +122,8 @@ void cataleg<Valor>::elimina(const string &k) throw(error) {
     }
     else {
         
-        unsigned long i = util::hash(k);
+        util::Hash<string> h;
+        unsigned long i = h(k);
 
         node_hash *p = this->_taula[i], *ant = NULL;
 
@@ -158,7 +160,8 @@ bool cataleg<Valor>::existeix(const string &k) const throw() {
         throw error(ClauStringBuit);
     }
     else {
-        unsigned long i = util::hash(k);
+        util::Hash<string> h;
+        unsigned long i = h(k);
 
         node_hash *p = this->_taula[i];
 
@@ -188,7 +191,9 @@ Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
 
     Valor returnVal;
 
-    unsigned long i = util::hash(k);
+    util::Hash<string> h;
+    unsigned long i = h(k);
+
     std::cout<<i;
     node_hash* p = _taula[i];
     bool trobat = false;
