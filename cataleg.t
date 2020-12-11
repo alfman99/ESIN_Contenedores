@@ -6,12 +6,13 @@
     aproximat d'elements que com a màxim s'inseriran al catàleg. */
 template<typename Valor>
 cataleg<Valor>::cataleg(nat numelems) throw(error) : _quants(0) {
-    this->_M = numelems;
-    this->_taula = new node_hash*[numelems];
+    this->_M = nextPrime(numelems);
+    this->_taula = new node_hash*[this->_M];
     this->_quants = 0;
     for (unsigned int i = 0; i < this->_M; i++){
         this->_taula[i] = NULL;
     }
+    std::cout << this->_M << std::endl;
 }
 
 /* Constructora per còpia, assignació i destructora. */
@@ -222,4 +223,33 @@ Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
 template<typename Valor>
 nat cataleg<Valor>::quants() const throw() {
     return this->_quants;
+}
+
+template<typename Valor>
+bool cataleg<Valor>::esPrimo(unsigned int numero) throw() {
+    if (numero == 0 || numero == 1) {
+        return false;
+    }
+    else {
+        for(unsigned int i = 2; i <= numero / 2; i++) {
+            if (numero % i == 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+template<typename Valor>
+nat cataleg<Valor>::nextPrime(nat num) throw() {
+    nat aux = num;
+    while (!esPrimo(aux)) {
+        if (aux % 2 == 0) {
+            aux++;
+        }
+        else {
+            aux += 2;
+        }
+    }
+    return aux;
 }

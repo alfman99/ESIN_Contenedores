@@ -9,3 +9,6 @@ struct node_hash {
 node_hash** _taula;
 nat _M;
 nat _quants;
+
+bool esPrimo(unsigned int numero) throw();
+unsigned int nextPrime(unsigned int num) throw();

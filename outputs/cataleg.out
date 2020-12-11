@@ -9,6 +9,7 @@
 ###!------------------------------------------------------------------
 ###!
 #init a1 cataleg<int> 0
+3
 ###!
 #val KuCha12
 Error::cataleg:31:Clau inexistent.
@@ -44,6 +45,7 @@ false
 ###!------------------------------
 ###!
 #init a2 cataleg<int> 1
+3
 ###!
 #assig KuCha12 12
 ###!
@@ -109,6 +111,7 @@ false
 ###!------------------------------
 ###!
 #init a31 cataleg<int> 2
+2
 ###!
 #assig KuCha1 1
 #assig HuCha2 2
@@ -159,6 +162,7 @@ false
 ###!------------------------------
 ###!
 #init a32 cataleg<int> 2
+2
 ###!
 #assig HuCha1 1
 #assig KuCha2 2
@@ -200,6 +204,7 @@ false
 ###!------------------------------
 ###!
 #init a41 cataleg<int> 3
+3
 ###!
 #assig HuCha1 1
 #assig KuCha2 2
@@ -261,6 +266,7 @@ false
 ###!------------------------------
 ###!
 #init a42 cataleg<int> 3
+3
 ###!
 #assig KuCha2 2
 #assig HuCha1 1
@@ -304,6 +310,7 @@ false
 ###!------------------------------
 ###!
 #init a43 cataleg<int> 3
+3
 ###!
 #assig HuCha1 1
 #assig KuCha2 2
