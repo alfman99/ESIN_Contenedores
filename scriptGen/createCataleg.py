@@ -19,10 +19,13 @@ def crearCabecera(id, nomCataleg, numClaus):
 fileName = 'cataleg-' + datetime.now().strftime('%d-%m-%Y-%H-%M-%S') + '.inp'
 fileSave = open(fileName, 'x')
 
-maxElems = 20
+maxElems = 50
 for i in range(1, maxElems+1):
+
+	fileSave.write('start_t\n')
+
 	objName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
-	numDicc = randint(0, 120)
+	numDicc = randint(0, 600)
 	# Cabecera del catalogo
 	fileSave.write(crearCabecera(i, objName, numDicc))
 	claves = []
@@ -55,6 +58,8 @@ for i in range(1, maxElems+1):
 		fileSave.write(buildTest(keywords[1], [check]))
 
 	fileSave.write(buildTest(keywords[6], [objName]))
+
+	fileSave.write('stop_t\n')
 
 
 
