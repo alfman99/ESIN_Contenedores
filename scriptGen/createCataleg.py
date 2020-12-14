@@ -25,7 +25,7 @@ for i in range(1, maxElems+1):
 	fileSave.write('start_t\n')
 
 	objName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
-	numDicc = randint(500000, 1500000)
+	numDicc = randint(50000, 150000)
 	# Cabecera del catalogo
 	fileSave.write(crearCabecera(i, objName, numDicc))
 	claves = []
