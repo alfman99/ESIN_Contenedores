@@ -1,9 +1,31 @@
 #include "terminal.hpp"
 #include "terminal.rep"
 
-
+/* Constructora. Crea una terminal buida amb n fileres de m places
+   cadascuna, i una alçada màxima d'apilament h; a més fixa l'estratègia
+   d'inserció i retirada dels contenidors respecte el paràmetre st.
+   Genera un error si n=0, m=0, h=0, h > HMAX o
+   st no pertany a {FIRST_FIT, LLIURE}. */
 terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error){
-   
+   if (n == 0) {
+      throw error(NumFileresIncorr);
+   } 
+   else if (m == 0) {
+      throw error(NumPlacesIncorr);
+   } 
+   else if (h == 0 || h > HMAX) {
+      throw error(AlcadaMaxIncorr);
+   }
+   else if (st != FIRST_FIT || st != LLIURE) {
+      throw error(EstrategiaIncorr);
+   }
+   else {
+      this->fileres = n;
+      this->places = m;
+      this->pisos = h;
+      estrategia_usada = st;
+   }
+
 }
 
 /* Constructora per còpia, assignació i destructora. */
@@ -98,7 +120,7 @@ nat terminal::fragmentacio() const throw(){
    En canvi no requereix cap operació de grua inserir o
    retirar directament un contenidor de l'àrea d'espera. */
 nat terminal::ops_grua() const throw(){
-   
+   return moviments_grua;
 }
 
 /* Retorna la llista de les matrícules de tots els contenidors
@@ -109,17 +131,17 @@ void terminal::area_espera(list<string> &l) const throw(){
 
 /* Retorna el número de fileres de la terminal. */
 nat terminal::num_fileres() const throw(){
-   
+   return this->fileres;
 }
 
 /* Retorna el número de places per filera de la terminal. */
 nat terminal::num_places() const throw(){
-   
+   return this->places;
 }
 
 /* Retorna l'alçada màxima d'apilament de la terminal. */
 nat terminal::num_pisos() const throw(){
-   
+   return this->pisos;
 }
 
 /* Retorna l'estratègia d'inserció i retirada de contenidors de

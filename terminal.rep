@@ -1,0 +1,7 @@
+nat fileres;
+nat places;
+nat pisos;
+
+nat moviments_grua;
+
+estrategia estrategia_usada;
