@@ -4,4 +4,4 @@ nat pisos;
 
 nat moviments_grua;
 
-estrategia estrategia_usada;
+terminal::estrategia estrategia_usada;

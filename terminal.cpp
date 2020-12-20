@@ -146,6 +146,6 @@ nat terminal::num_pisos() const throw(){
 
 /* Retorna l'estratègia d'inserció i retirada de contenidors de
    la terminal. */
-/*estrategia terminal::quina_estrategia() const throw(){
-
-}*/
+terminal::estrategia terminal::quina_estrategia() const throw(){
+   return estrategia_usada;
+}
