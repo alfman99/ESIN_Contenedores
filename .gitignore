@@ -3,3 +3,4 @@
 *.o
 scriptGen/*.inp
 outputs/*.out
+.vscode
