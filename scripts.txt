@@ -17,3 +17,10 @@ g++ -c -Wall -Wno-deprecated cataleg.t
 g++ -c -Wall -Wno-deprecated driver_cataleg.cpp
 g++ -o program.e driver_cataleg.o -lesin
 ./program.e < jocsProba/jp_public_cataleg.in > outputs/cataleg.out
+
+
+// terminal
+g++ -c -Wall -Wno-deprecated terminal.cpp
+g++ -c -Wall -Wno-deprecated driver_terminal.cpp
+g++ -o program.e driver_terminal.o -lesin
+./program.e < jocsProba/jp_public_terminal.in > outputs/terminal.out
