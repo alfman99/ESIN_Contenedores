@@ -5,3 +5,8 @@ nat pisos;
 nat moviments_grua;
 
 terminal::estrategia estrategia_usada;
+
+string*** principalStorage;
+list<string> waitingStorage;
+
+cataleg<std::pair<contenidor,ubicacio>> elementos;

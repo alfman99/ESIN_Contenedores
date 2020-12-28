@@ -6,7 +6,7 @@
    d'inserció i retirada dels contenidors respecte el paràmetre st.
    Genera un error si n=0, m=0, h=0, h > HMAX o
    st no pertany a {FIRST_FIT, LLIURE}. */
-terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error){
+terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) : elementos(n * m * h + (n * m)/2) {
    if (n == 0) {
       throw error(NumFileresIncorr);
    } 
@@ -26,10 +26,21 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error){
       estrategia_usada = st;
    }
 
+   principalStorage = new string**[this->fileres];
+   for (int i = 0; i < this->fileres; i++) {
+      principalStorage[i] = new string*[this->places];
+      for (int j = 0; j < this->places; j++) {
+         principalStorage[i][j] = new string[this->pisos];
+         for (int k = 0; k < this->pisos; k++) {
+            principalStorage[i][j][k] = "";
+         }
+      }
+   }
+   
 }
 
 /* Constructora per còpia, assignació i destructora. */
-terminal::terminal(const terminal& b) throw(error){
+terminal::terminal(const terminal& b) throw(error) : elementos(b.fileres * b.places * b.pisos + (b.fileres * b.places)/2) {
    
 }
 
@@ -38,7 +49,13 @@ terminal& terminal::operator=(const terminal& b) throw(error){
 }
 
 terminal::~terminal() throw(){
-
+   for (int i = 0; i < this->fileres; i++) {
+      for (int j = 0; j < this->places; j++) {
+         delete [] principalStorage[i][j];
+      }
+      delete [] principalStorage[i];
+   }
+   delete principalStorage;
 }
 
 /* Col·loca el contenidor c en l'àrea d'emmagatzematge de la terminal o
@@ -79,14 +96,14 @@ void terminal::retira_contenidor(const string &m) throw(error){
    Cal recordar que si un contenidor té més de 10 peus, la seva ubicació
    correspon a la plaça que tingui el número de plaça més petit. */
 ubicacio terminal::on(const string &m) const throw(){
-
+   return elementos[m].second;
 }
 
 /* Retorna la longitud del contenidor la matrícula del qual és igual
    a m. Genera un error si no existeix un contenidor a la terminal
    la matrícula del qual sigui igual a m. */
 nat terminal::longitud(const string &m) const throw(error){
-   
+   return elementos[m].first.longitud();
 }
 
 /* Retorna la matrícula del contenidor que ocupa la ubicació u = <i, j, k>
@@ -98,7 +115,11 @@ nat terminal::longitud(const string &m) const throw(error){
    ocupar diverses places i la seva ubicació es correspon amb la de la
    plaça ocupada amb número de plaça més baix. */
 void terminal::contenidor_ocupa(const ubicacio &u, string &m) const throw(error){
+   if (u.filera() < 0 || u.placa() < 0 || u.pis() < 0 || u.filera() > this->fileres || u.placa() > this->places || u.pis() > this->pisos) {
+      throw error(UbicacioNoMagatzem);
+   }
 
+   m = principalStorage[u.filera()][u.placa()][u.pis()];
 }  
 
 /* Retorna el nombre de places de la terminal que en aquest instant
@@ -126,7 +147,7 @@ nat terminal::ops_grua() const throw(){
 /* Retorna la llista de les matrícules de tots els contenidors
    de l'àrea d'espera de la terminal, en ordre alfabètic creixent. */
 void terminal::area_espera(list<string> &l) const throw(){
-
+   l.sort();
 }
 
 /* Retorna el número de fileres de la terminal. */
