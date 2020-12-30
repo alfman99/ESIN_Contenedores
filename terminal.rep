@@ -1,6 +1,6 @@
-nat fileres;
-nat places;
-nat pisos;
+int fileres;
+int places;
+int pisos;
 
 nat moviments_grua;
 
@@ -9,4 +9,4 @@ terminal::estrategia estrategia_usada;
 string*** principalStorage;
 list<string> waitingStorage;
 
-cataleg<std::pair<contenidor,ubicacio>> elementos;
+cataleg< std::pair<contenidor, ubicacio> >* elementos;

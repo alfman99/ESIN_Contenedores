@@ -1,0 +1,59 @@
+#help
+-----------------------------------------------
+Operaciones disponibles:
+# <comentario>
+% <comando Unix>
+[<any>] != <any>
+[<any>] < <any>
+[<any>] <= <any>
+[<id1>] = <id2>: copia <id2> sobre el OC o sobre <id1>
+[<any>] == <any>
+[<any>] > <any>
+[<any>] >= <any>
+help|? [<op|clase>]: ayuda sobre las operaciones; si se indica 'op' da ayuda sobre una concreta, si se indica 'clase' da ayuda sobre las operaciones aplicables sobre la clase
+applies_to <op>: devuelve el tipo sobre el que se aplica <op>
+apply <operacion> <filename>: aplica <op> sobre los argumentos en <filename>
+[<any>] area_espera
+[<cataleg<int>>] assig <string> <int>
+clear_all: destruye todos los objetos en el sistema
+[<terminal>] contenidor_ocupa <ubicacio>
+curr_obj: imprime el nombre del objeto en curso
+[<id>] destroy: destruye el objeto <id> o el OC
+echo_input <on|off>: reproduce o no en el output las instrucciones del input
+echo_output <on|off>: escribe en el output el resultado de las operaciones
+[<cataleg<int>>] elimina <string>
+[<cataleg<int>>] existeix <string>
+[<ubicacio>] filera
+[<terminal>] fragmentacio
+help|? [<op|clase>]: ayuda sobre las operaciones; si se indica 'op' da ayuda sobre una concreta, si se indica 'clase' da ayuda sobre las operaciones aplicables sobre la clase
+init <id> <class> <arg1> ...
+initcopy <id1> = <id2>: inicializa <id1> con una copia de <id2>
+[<any>] insereix_c <contenidor>
+[<any>] insereix_contenidor <contenidor>
+iter <N> <op> <parametros>: aplica <op> sobre los argumentos N veces>
+known_types: retorna la lista de tipos conocidos
+list_objects [<class>]: lista todos los objetos en el sistema o los de la clase dada
+load <filename>: lee instrucciones desde el fichero indicado
+[<terminal>] long_terminal <string>
+[<contenidor>] longitud
+[<any>] mapa
+[<contenidor>] matricula
+[<any>] num_fileres
+[<any>] num_pisos
+[<any>] num_places
+[<terminal>] on <string>
+[<terminal>] ops_grua
+[<ubicacio>] pis
+[<ubicacio>] placa
+print_memory|pm <n>: imprime un informe sobre el estado de memoria dinamica
+print_memory|pm <n>: imprime un informe sobre el estado de memoria dinamica
+[<cataleg<int>>] quants
+[<any>] retira_c <string>
+[<any>] retira_contenidor <string>
+sel_curr_obj <id>: selecciona <id> como objeto en curso
+set_memory <max_chunks> <max_bytes>: fija el tama�o de memoria
+start_t: pone en marcha el crono
+stop_t: detiene e imprime el crono
+test_memory [<class>]: pasa tests de memoria din�mica de la clase o de todas las clases
+[<cataleg<int>>] val <string>
+-----------------------------------------------

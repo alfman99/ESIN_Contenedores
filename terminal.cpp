@@ -6,7 +6,7 @@
    d'inserció i retirada dels contenidors respecte el paràmetre st.
    Genera un error si n=0, m=0, h=0, h > HMAX o
    st no pertany a {FIRST_FIT, LLIURE}. */
-terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) : elementos(n * m * h + (n * m)/2) {
+terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) {
    if (n == 0) {
       throw error(NumFileresIncorr);
    } 
@@ -16,7 +16,7 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) : elementos(
    else if (h == 0 || h > HMAX) {
       throw error(AlcadaMaxIncorr);
    }
-   else if (st != FIRST_FIT || st != LLIURE) {
+   else if (st != FIRST_FIT && st != LLIURE) {
       throw error(EstrategiaIncorr);
    }
    else {
@@ -25,6 +25,8 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) : elementos(
       this->pisos = h;
       estrategia_usada = st;
    }
+
+   elementos = new cataleg< std::pair<contenidor,ubicacio> >(this->fileres * this->places * this->pisos);
 
    principalStorage = new string**[this->fileres];
    for (int i = 0; i < this->fileres; i++) {
@@ -40,7 +42,7 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) : elementos(
 }
 
 /* Constructora per còpia, assignació i destructora. */
-terminal::terminal(const terminal& b) throw(error) : elementos(b.fileres * b.places * b.pisos + (b.fileres * b.places)/2) {
+terminal::terminal(const terminal& b) throw(error) {
    
 }
 
@@ -48,7 +50,8 @@ terminal& terminal::operator=(const terminal& b) throw(error){
    return *this;
 }
 
-terminal::~terminal() throw(){
+terminal::~terminal() throw() {
+   delete this->elementos;
    for (int i = 0; i < this->fileres; i++) {
       for (int j = 0; j < this->places; j++) {
          delete [] principalStorage[i][j];
@@ -69,7 +72,8 @@ terminal::~terminal() throw(){
    usant. Finalment, genera un error si ja existís a la terminal un
    contenidor amb una matrícula idèntica que la del contenidor c. */
 void terminal::insereix_contenidor(const contenidor &c) throw(error){
-
+   std::cout << "insereix... hacer" << std::endl;
+   (*elementos).assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacio(-1,-1,-1)));
 }
 
 /* Retira de la terminal el contenidor c la matrícula del qual és igual
@@ -85,7 +89,7 @@ void terminal::insereix_contenidor(const contenidor &c) throw(error){
    l'ordre que indiqui l'estratègia que s'està usant. Genera un error si a
    la terminal no hi ha cap contenidor la matrícula del qual sigui igual a m. */
 void terminal::retira_contenidor(const string &m) throw(error){
-
+   std::cout << "retira... hacer" << std::endl;
 }
 
 /* Retorna la ubicació <i, j, k> del contenidor la matrícula del qual és
@@ -96,14 +100,14 @@ void terminal::retira_contenidor(const string &m) throw(error){
    Cal recordar que si un contenidor té més de 10 peus, la seva ubicació
    correspon a la plaça que tingui el número de plaça més petit. */
 ubicacio terminal::on(const string &m) const throw(){
-   return elementos[m].second;
+   return (*elementos)[m].second;
 }
 
 /* Retorna la longitud del contenidor la matrícula del qual és igual
    a m. Genera un error si no existeix un contenidor a la terminal
    la matrícula del qual sigui igual a m. */
 nat terminal::longitud(const string &m) const throw(error){
-   return elementos[m].first.longitud();
+   return (*elementos)[m].first.longitud();
 }
 
 /* Retorna la matrícula del contenidor que ocupa la ubicació u = <i, j, k>
@@ -129,7 +133,8 @@ void terminal::contenidor_ocupa(const ubicacio &u, string &m) const throw(error)
    <f, 0, 1>, <f, 1, 2>, <f, 2, 1>, <f, 7, 1>, <f, 8, 0>, <f, 9, 1> i
    <f, 10, 0>). */
 nat terminal::fragmentacio() const throw(){
-   
+   // Hacer
+   return 3;
 }
 
 /* Retorna el número d'operacions de grua realitzades des del moment
@@ -147,6 +152,7 @@ nat terminal::ops_grua() const throw(){
 /* Retorna la llista de les matrícules de tots els contenidors
    de l'àrea d'espera de la terminal, en ordre alfabètic creixent. */
 void terminal::area_espera(list<string> &l) const throw(){
+   // Hacer
    l.sort();
 }
 

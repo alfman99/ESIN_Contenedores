@@ -24,3 +24,8 @@ g++ -c -Wall -Wno-deprecated terminal.cpp
 g++ -c -Wall -Wno-deprecated driver_terminal.cpp
 g++ -o program.e driver_terminal.o -lesin
 ./program.e < jocsProba/jp_public_terminal.in > outputs/terminal.out
+
+
+// Compila todo
+make
+./program.exe < jocsProba/jp_public_terminal.in > outputs/terminal.out

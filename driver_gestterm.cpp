@@ -29,7 +29,7 @@ ostream& operator<<(ostream& os, const contenidor& c) {
 
 // funcions d'utilitat
 
-// imprimeix un boole�
+// imprimeix un booleà
 ostream& operator<=(ostream& os, const bool b) {
   os << (b ? "true" : "false");
   return os;
@@ -438,8 +438,8 @@ int main(){
   gen_driver d("gestterm.err", false);
 
   //contenidor
-  // d.add_call("longitud", tracta_longitud, "contenidor");
-  // d.add_call("matricula", tracta_matricula, "contenidor");
+  d.add_call("longitud", tracta_longitud, "contenidor");
+  d.add_call("matricula", tracta_matricula, "contenidor");
 
   //ubicacio
   d.add_call("filera", tracta_filera, "ubicacio");
@@ -478,11 +478,11 @@ int main(){
   d.add_call("retira_contenidor", tracta_retira_contenidor, "any", "string");
   d.add_call("mapa", tracta_mapa, "any");
   
-  // instal�lacio de tipus
-  // d.install_type<contenidor>();
+  // instal·lacio de tipus
+  d.install_type<contenidor>();
   d.install_type<ubicacio>();
-  //d.install_type<cataleg<int> >();
-  // d.install_type<terminal>();
+  d.install_type<cataleg<int> >();
+  d.install_type<terminal>();
 
   d.go();
 }

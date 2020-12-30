@@ -1,5 +1,4 @@
 #include "cataleg.hpp"
-
 #include <esin/util>
 
 /* Constructora. Crea un catàleg buit on numelems és el nombre
@@ -12,7 +11,6 @@ cataleg<Valor>::cataleg(nat numelems) throw(error) : _quants(0) {
     for (unsigned int i = 0; i < this->_M; i++){
         this->_taula[i] = NULL;
     }
-    std::cout << this->_M << std::endl;
 }
 
 /* Constructora per còpia, assignació i destructora. */
@@ -192,30 +190,20 @@ Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
         throw error(ClauInexistent);
     }
 
-    Valor returnVal;
-
     util::Hash<string> h;
     int i = h(k)%this->_M;
 
     node_hash* p = this->_taula[i];
-    bool trobat = false;
-    while (p != NULL && !trobat) {
+    while (p != NULL) {
         if (p->_k == k) {
-            trobat = true;
-            returnVal = p->_v;
+            return p->_v;
         }
         else {
             p = p->_seg;
         }
     }
 
-    if (trobat) {
-        return returnVal;
-    }
-    else {
-        throw error(ClauInexistent);
-    }  
-    
+    throw error(ClauInexistent);
 }
 
 /* Retorna el nombre d'elements que s'han inserit en el catàleg
