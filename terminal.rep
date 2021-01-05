@@ -10,3 +10,9 @@ string*** principalStorage;
 list<string> waitingStorage;
 
 cataleg< std::pair<contenidor, ubicacio> >* elementos;
+
+void insereix_firstfit(const contenidor &c);
+void insereix_lliure(const contenidor &c);
+
+void insertar_contenedor_principal(const contenidor &c, const ubicacio &u);
+void insertar_contenedor_espera(const contenidor &c);

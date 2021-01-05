@@ -26,7 +26,7 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) {
       estrategia_usada = st;
    }
 
-   elementos = new cataleg< std::pair<contenidor,ubicacio> >(this->fileres * this->places * this->pisos);
+   elementos = new cataleg< std::pair<contenidor,ubicacio> >(this->fileres * this->places * this->pisos + 50);
 
    principalStorage = new string**[this->fileres];
    for (int i = 0; i < this->fileres; i++) {
@@ -37,16 +37,38 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) {
             principalStorage[i][j][k] = "";
          }
       }
-   }
-   
+   }   
 }
 
 /* Constructora per còpia, assignació i destructora. */
 terminal::terminal(const terminal& b) throw(error) {
-   
+   *this = b;
 }
 
 terminal& terminal::operator=(const terminal& b) throw(error){
+   if (this != &b) {
+      this->fileres = b.fileres;
+      this->places = b.places;
+      this->pisos = b.pisos;
+      this->moviments_grua = b.moviments_grua;
+      this->estrategia_usada = b.estrategia_usada;
+
+      this->principalStorage = new string**[this->fileres];
+      for (int i = 0; i < this->fileres; i++) {
+         this->principalStorage[i] = new string*[this->places];
+         for (int j = 0; j < this->places; j++) {
+            this->principalStorage[i][j] = new string[this->pisos];
+            for (int k = 0; k < this->pisos; k++) {
+               this->principalStorage[i][j][k] = b.principalStorage[i][j][k];
+            }
+         }
+      }
+
+      this->waitingStorage = b.waitingStorage;
+
+      this->elementos = b.elementos;
+
+   }
    return *this;
 }
 
@@ -72,8 +94,14 @@ terminal::~terminal() throw() {
    usant. Finalment, genera un error si ja existís a la terminal un
    contenidor amb una matrícula idèntica que la del contenidor c. */
 void terminal::insereix_contenidor(const contenidor &c) throw(error){
-   std::cout << "insereix... hacer" << std::endl;
-   (*elementos).assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacio(-1,-1,-1)));
+   switch (this->estrategia_usada) {
+   case FIRST_FIT:
+      insereix_firstfit(c);
+      break;
+   case LLIURE:
+      insereix_lliure(c);
+      break;
+   }
 }
 
 /* Retira de la terminal el contenidor c la matrícula del qual és igual
@@ -100,14 +128,24 @@ void terminal::retira_contenidor(const string &m) throw(error){
    Cal recordar que si un contenidor té més de 10 peus, la seva ubicació
    correspon a la plaça que tingui el número de plaça més petit. */
 ubicacio terminal::on(const string &m) const throw(){
-   return (*elementos)[m].second;
+   if ((*elementos).existeix(m)) {
+      return (*elementos)[m].second;
+   }
+   else {
+      return ubicacio(-1, -1, -1);
+   }
 }
 
 /* Retorna la longitud del contenidor la matrícula del qual és igual
    a m. Genera un error si no existeix un contenidor a la terminal
    la matrícula del qual sigui igual a m. */
 nat terminal::longitud(const string &m) const throw(error){
-   return (*elementos)[m].first.longitud();
+   if ((*elementos).existeix(m)) {
+      return (*elementos)[m].first.longitud();
+   }
+   else {
+      throw error(MatriculaInexistent);
+   }
 }
 
 /* Retorna la matrícula del contenidor que ocupa la ubicació u = <i, j, k>
@@ -119,11 +157,12 @@ nat terminal::longitud(const string &m) const throw(error){
    ocupar diverses places i la seva ubicació es correspon amb la de la
    plaça ocupada amb número de plaça més baix. */
 void terminal::contenidor_ocupa(const ubicacio &u, string &m) const throw(error){
-   if (u.filera() < 0 || u.placa() < 0 || u.pis() < 0 || u.filera() > this->fileres || u.placa() > this->places || u.pis() > this->pisos) {
-      throw error(UbicacioNoMagatzem);
+   if (u.filera() >= 0 && u.placa() >= 0 && u.pis() >= 0 && u.filera() < this->fileres && u.placa() < this->places && u.pis() < this->pisos) {
+      m = principalStorage[u.filera()][u.placa()][u.pis()];
    }
-
-   m = principalStorage[u.filera()][u.placa()][u.pis()];
+   else {
+      throw error(UbicacioNoMagatzem);
+   }   
 }  
 
 /* Retorna el nombre de places de la terminal que en aquest instant
@@ -153,6 +192,7 @@ nat terminal::ops_grua() const throw(){
    de l'àrea d'espera de la terminal, en ordre alfabètic creixent. */
 void terminal::area_espera(list<string> &l) const throw(){
    // Hacer
+   l = this->waitingStorage;
    l.sort();
 }
 
@@ -175,4 +215,71 @@ nat terminal::num_pisos() const throw(){
    la terminal. */
 terminal::estrategia terminal::quina_estrategia() const throw(){
    return estrategia_usada;
+}
+
+void terminal::insereix_firstfit(const contenidor &c) {
+
+   if (this->elementos->existeix(c.matricula())) {
+      throw error(MatriculaDuplicada);
+   }
+
+   bool encontrado = false;
+   ubicacio invalida(-1,-1,-1);
+   
+   int i = 0;
+   while (i < this->pisos && !encontrado) {
+      int j = 0;
+      while (j < this->fileres && !encontrado) {
+         int k = 0;
+         ubicacio posicion(-1,-1,-1);
+         int contador = 0;
+         while (k < this->places && !encontrado) {
+            if (this->principalStorage[j][k][i] == "") {
+               // Si está en el primer priso o si tiene un contenedor debajo
+               if (i == 0 || this->principalStorage[j][k][i-1] != "") {
+                  if (posicion == invalida) {
+                     posicion = ubicacio(j, k, i);
+                  }
+                  contador++;
+               }
+            }
+            else {
+               posicion = invalida;
+               contador = 0;
+            }
+            if (contador == c.longitud()/10) {
+               encontrado = true;
+               insertar_contenedor_principal(c, posicion);
+            }
+            else {
+               k++;
+            }
+         }
+         j++;
+      }
+      i++;
+   }
+
+   if (!encontrado) {
+      insertar_contenedor_espera(c);      
+   }
+
+}
+
+void terminal::insereix_lliure(const contenidor &c) {
+   return;
+}
+
+// Inserta el contenedor de la ultima posicion hasta la primera en el espacio
+void terminal::insertar_contenedor_principal(const contenidor &c, const ubicacio &u) {
+   for (int i = u.placa(); i < (u.placa() + c.longitud()/10); i++) {
+      this->principalStorage[u.filera()][i][u.pis()] = c.matricula();
+   }
+   this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, u));
+   this->moviments_grua++;
+}
+
+void terminal::insertar_contenedor_espera(const contenidor &c) {
+   this->waitingStorage.push_back(c.matricula());
+   this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacio(-1, 0, 0)));
 }
