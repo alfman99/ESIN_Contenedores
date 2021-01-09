@@ -7,6 +7,7 @@ nat moviments_grua;
 terminal::estrategia estrategia_usada;
 
 string*** principalStorage;
+int** estadoPrincipal;
 list<string> waitingStorage;
 
 cataleg< std::pair<contenidor, ubicacio> >* elementos;
@@ -19,7 +20,7 @@ void eliminar_contenedor_principal(const contenidor &c);
 
 void insertar_contenedor_espera(const contenidor &c);
 
-void mover_espera_principal(const contenidor &c, const ubicacio &u);
+void mover_espera_principal(const contenidor &c, list<string>::iterator& it);
 void mover_principal_espera(const contenidor &c);
 
 void retira_contenedor_principal(const string &m, bool elimina);
@@ -28,3 +29,5 @@ void retira_contenedor_espera(const contenidor &c);
 void recolocar_espera_en_principal();
 
 ubicacio encontrarPosicionTerminal_firstfit(const contenidor &c);
+
+bool cabeContenedorUbi(const int& size, const int& i, const int& j);
