@@ -15,4 +15,16 @@ void insereix_firstfit(const contenidor &c);
 void insereix_lliure(const contenidor &c);
 
 void insertar_contenedor_principal(const contenidor &c, const ubicacio &u);
+void eliminar_contenedor_principal(const contenidor &c);
+
 void insertar_contenedor_espera(const contenidor &c);
+
+void mover_espera_principal(const contenidor &c, const ubicacio &u);
+void mover_principal_espera(const contenidor &c);
+
+void retira_contenedor_principal(const string &m, bool elimina);
+void retira_contenedor_espera(const contenidor &c);
+
+void recolocar_espera_en_principal();
+
+ubicacio encontrarPosicionTerminal_firstfit(const contenidor &c);

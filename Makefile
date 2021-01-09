@@ -22,6 +22,7 @@ contenidor.o: contenidor.cpp contenidor.hpp contenidor.rep
 terminal.o: terminal.cpp terminal.hpp terminal.rep ubicacio.hpp ubicacio.rep contenidor.hpp contenidor.rep cataleg.hpp cataleg.rep
 	g++ -c terminal.cpp $(OPCIONS)
 
+
 clean:
 	rm *.o
 	rm *.exe
