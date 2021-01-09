@@ -112,6 +112,7 @@ void terminal::insereix_contenidor(const contenidor &c) throw(error){
    switch (this->estrategia_usada) {
    case FIRST_FIT: {
       insereix_firstfit(c);
+      // printMatrix();
       break;
    }
    case LLIURE: {
@@ -208,6 +209,14 @@ nat terminal::fragmentacio() const throw() {
          i++;
       }
    }
+
+   /*std::cout << "this->estadoPrincipal: " << std::endl;
+   for(int i = 0; i < this->fileres; i++) {
+      for(int j = 0; j < this->places; j++) {
+         std::cout << " " << this->estadoPrincipal[i][j];
+      }
+      std::cout << std::endl;
+   }*/
    
    return contador;
 }
@@ -283,9 +292,11 @@ void terminal::eliminar_contenedor_principal(const contenidor &c) {
       }
       for (int i = ub.placa(); i < ub.placa() + c.longitud()/10; i++) {
          this->estadoPrincipal[ub.filera()][i] -= 1;
+         // std::cout << c.matricula() << " " << ub.filera() << " " << i << std::endl;
       }
       this->elementos->elimina(c.matricula());
       this->moviments_grua++;
+      // std::cout << "ESTOY EN eliminar_contenedor_principal" <<  std::endl;
    }
 }
 
@@ -296,6 +307,7 @@ void terminal::insertar_contenedor_espera(const contenidor &c) {
    }
    this->waitingStorage.push_front(c.matricula());
    this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacioEspera));
+   // std::cout << "ESTOY EN insertar_contenedor_espera" <<  std::endl;
 }
 
 // Mueve un contenedor del area de espera al principal
@@ -330,12 +342,12 @@ void terminal::retira_contenedor_principal(const string &m, bool elimina) {
 
    int i = cont.second.placa();
    while(i < cont.second.placa() + cont.first.longitud()/10) {
-      int j = this->pisos-1;
-      while(j > cont.second.pis()) {
+      int j = cont.second.pis()+1;
+      while(j < this->pisos) {
          if (this->principalStorage[cont.second.filera()][i][j] != "") {
             retira_contenedor_principal(this->principalStorage[cont.second.filera()][i][j], false);
          }
-         j--;
+         j++;
       }
       i++;
    }
@@ -346,8 +358,6 @@ void terminal::retira_contenedor_principal(const string &m, bool elimina) {
    else {
       eliminar_contenedor_principal(cont.first);
    }
-
-   recolocar_espera_en_principal();
 }
 
 // Elimina el contenedor de la zona de espera
@@ -387,15 +397,25 @@ bool terminal::cabeContenedorUbi(const int& size, const int& i, const int& j) {
    int posIni = this->estadoPrincipal[i][j];
    int contador = 0;
    for(int k = j; (k < j + size && k < this->places); k++) {
-      if (this->estadoPrincipal[i][k] != posIni) {
+      if (this->estadoPrincipal[i][k] != posIni || this->estadoPrincipal[i][k] >= this->pisos) {
          return false;
       }
       contador++;
    }
-   if (this->estadoPrincipal[i][j] < this->pisos && contador >= size) {
+   if (contador == size) {
       return true;
    }
    else {
       return false;
+   }
+}
+
+void terminal::printMatrix() {
+   std::cout << "this->estadoPrincipal: " << std::endl;
+   for(int i = 0; i < this->fileres; i++) {
+      for(int j = 0; j < this->places; j++) {
+         std::cout << " " << this->estadoPrincipal[i][j];
+      }
+      std::cout << std::endl;
    }
 }

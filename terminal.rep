@@ -31,3 +31,5 @@ void recolocar_espera_en_principal();
 ubicacio encontrarPosicionTerminal_firstfit(const contenidor &c);
 
 bool cabeContenedorUbi(const int& size, const int& i, const int& j);
+
+void printMatrix();
