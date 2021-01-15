@@ -299,7 +299,16 @@ void terminal::insertar_contenedor_espera(const contenidor &c) {
    if (this->elementos->existeix(c.matricula())) {
       this->elementos->elimina(c.matricula());
    }
-   this->waitingStorage.push_front(c.matricula());
+   switch (this->estrategia_usada) {
+      case FIRST_FIT: {
+         this->waitingStorage.push_front(c.matricula());
+         break;
+      }
+      case LLIURE: {
+         this->waitingStorage.push_back(c.matricula());
+         break;
+      }
+   }
    this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacioEspera));
 }
 
