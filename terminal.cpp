@@ -26,22 +26,24 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) {
 
    elementos = new cataleg< std::pair<contenidor,ubicacio> >(this->fileres * this->places * this->pisos + 50);
 
+   // inicializamos principalStorage a strings vacias
    principalStorage = new string**[this->fileres];
    for (int i = 0; i < this->fileres; i++) {
       principalStorage[i] = new string*[this->places];
       for (int j = 0; j < this->places; j++) {
          principalStorage[i][j] = new string[this->pisos];
          for (int k = 0; k < this->pisos; k++) {
-            principalStorage[i][j][k] = "";
+            principalStorage[i][j][k] = ""; 
          }
       }
    }
 
+   // inicializamos estadoPrincipal a 0
    estadoPrincipal = new int*[this->fileres];
    for (int i = 0; i < this->fileres; i++) {
       estadoPrincipal[i] = new int[this->places];
       for (int j = 0; j < this->places; j++) {
-         estadoPrincipal[i][j] = 0;
+         estadoPrincipal[i][j] = 0; 
       }
    }
 
@@ -112,6 +114,7 @@ void terminal::insereix_contenidor(const contenidor &c) throw(error){
 
    ubicacio ub = ubicacioError;
 
+   // Buscamos la ubicacion en funcion de la estrategia utilizada
    switch (this->estrategia_usada) {
    case FIRST_FIT: {
       ub = encontrarPosicionTerminal_firstfit(c);
@@ -123,6 +126,8 @@ void terminal::insereix_contenidor(const contenidor &c) throw(error){
    }
    }
 
+   // Si no se ha encontrado ubicacion valida en la principalStorage
+   // se guarda en la zona de espera
    if (ub != ubicacioError) {
       insertar_contenedor_principal(c, ub);
       recolocar_espera_en_principal();
@@ -149,13 +154,6 @@ void terminal::retira_contenidor(const string &m) throw(error){
    }
 }
 
-/* Retorna la ubicació <i, j, k> del contenidor la matrícula del qual és
-   igual a m si el contenidor està a l'àrea d'emmagatzematge de la terminal,
-   la ubicació <-1, 0, 0> si el contenidor està a l'àrea d'espera, i la
-   ubicació <-1, -1, -1> si no existeix cap contenidor que tingui una
-   matrícula igual a m.
-   Cal recordar que si un contenidor té més de 10 peus, la seva ubicació
-   correspon a la plaça que tingui el número de plaça més petit. */
 ubicacio terminal::on(const string &m) const throw(){
    if ((*elementos).existeix(m)) {
       return (*elementos)[m].second;
@@ -175,6 +173,7 @@ nat terminal::longitud(const string &m) const throw(error){
 }
 
 void terminal::contenidor_ocupa(const ubicacio &u, string &m) const throw(error){
+   // Comprobamos que el contendedor esté en la zona principal (principalStorage)
    if (u.filera() >= 0 && u.placa() >= 0 && u.pis() >= 0 && u.filera() < this->fileres && u.placa() < this->places && u.pis() < this->pisos) {
       m = principalStorage[u.filera()][u.placa()][u.pis()];
    }
@@ -187,6 +186,9 @@ nat terminal::fragmentacio() const throw() {
    int contador = 0;
    int i = 0;
 
+   // Si el numero de plazas es igual a 1
+   // solo tendremos que contar la cantidad de plazas que no ocupan todos los pisos
+   // de la plaza y la fila
    if (this->places == 1) {
       for (int i = 0; i < this->fileres; i++) {
          if (this->estadoPrincipal[i][0] != this->pisos) {
@@ -199,17 +201,17 @@ nat terminal::fragmentacio() const throw() {
          int j = 0;
          while (j < this->places) {
             if (this->estadoPrincipal[i][j] != this->pisos) {
-               if (j == 0) {
+               if (j == 0) {// si está en el principio
                   if (this->estadoPrincipal[i][j] != this->estadoPrincipal[i][j+1]) {
                      contador++;
                   }
                }
-               else if (j == this->places-1) {
+               else if (j == this->places-1) {// si está en el final
                   if (this->estadoPrincipal[i][j] != this->estadoPrincipal[i][j-1]) {
                      contador++;
                   }
                }
-               else {
+               else {// si está entre medio
                   if (this->estadoPrincipal[i][j] != this->estadoPrincipal[i][j-1] && this->estadoPrincipal[i][j] != this->estadoPrincipal[i][j+1]) {
                      contador++;
                   }
@@ -220,14 +222,6 @@ nat terminal::fragmentacio() const throw() {
          i++;
       }
    }
-
-   /*std::cout << "this->estadoPrincipal: " << std::endl;
-   for(int i = 0; i < this->fileres; i++) {
-      for(int j = 0; j < this->places; j++) {
-         std::cout << " " << this->estadoPrincipal[i][j];
-      }
-      std::cout << std::endl;
-   }*/
    
    return contador;
 }
@@ -236,84 +230,73 @@ nat terminal::ops_grua() const throw(){
    return moviments_grua;
 }
 
-// Podemos implementar nosotros el sort
 void terminal::area_espera(list<string> &l) const throw(){
-   // Hacer
    l = this->waitingStorage;
    l.sort();
 }
 
-/* Retorna el número de fileres de la terminal. */
 nat terminal::num_fileres() const throw(){
    return this->fileres;
 }
 
-/* Retorna el número de places per filera de la terminal. */
 nat terminal::num_places() const throw(){
    return this->places;
 }
 
-/* Retorna l'alçada màxima d'apilament de la terminal. */
 nat terminal::num_pisos() const throw(){
    return this->pisos;
 }
 
-/* Retorna l'estratègia d'inserció i retirada de contenidors de
-   la terminal. */
 terminal::estrategia terminal::quina_estrategia() const throw(){
    return estrategia_usada;
 }
 
-// Inserta el contenedor en el area principal
 void terminal::insertar_contenedor_principal(const contenidor &c, const ubicacio &u) {
    if (this->elementos->existeix(c.matricula())) {
       this->elementos->elimina(c.matricula());
    }
-   for (int i = u.placa(); i < (u.placa() + c.longitud()/10); i++) {
+   for (int i = u.placa(); i < (u.placa() + c.longitud()/10); i++) { // pone todos las posiciones donde va el contenedor al valor de la matricula
       this->principalStorage[u.filera()][i][u.pis()] = c.matricula();
    }
-   for (int i = u.placa(); i < (u.placa() + c.longitud()/10); i++) {
+   for (int i = u.placa(); i < (u.placa() + c.longitud()/10); i++) { // aumenta el piso de las posiciones en estadoPrincipal
       this->estadoPrincipal[u.filera()][i] += 1;
    }
-   this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, u));
+   this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, u)); // guarda el contenedor y ubicaion en el catalogo
    this->moviments_grua++;
 }
 
-// Eliminar el contenedor de la area principal para siempre
 void terminal::eliminar_contenedor_principal(const contenidor &c) {
    if (this->elementos->existeix(c.matricula())) {
       ubicacio ub = (*elementos)[c.matricula()].second;
-      for (int i = ub.placa(); i < ub.placa() + c.longitud()/10; i++) {
+      for (int i = ub.placa(); i < ub.placa() + c.longitud()/10; i++) { // pone todos las posiciones donde va el contenedor a ""
          this->principalStorage[ub.filera()][i][ub.pis()] = "";
       }
-      for (int i = ub.placa(); i < ub.placa() + c.longitud()/10; i++) {
+      for (int i = ub.placa(); i < ub.placa() + c.longitud()/10; i++) { // disminuye el piso de las posiciones en estadoPrincipal
          this->estadoPrincipal[ub.filera()][i] -= 1;
       }
-      this->elementos->elimina(c.matricula());
+      this->elementos->elimina(c.matricula()); // elimina el contenedor del catalogo
       this->moviments_grua++;
    }
 }
 
-// Inserta el contenedor en el area de espera
 void terminal::insertar_contenedor_espera(const contenidor &c) {
    if (this->elementos->existeix(c.matricula())) {
       this->elementos->elimina(c.matricula());
    }
    switch (this->estrategia_usada) {
       case FIRST_FIT: {
-         this->waitingStorage.push_front(c.matricula());
+         this->waitingStorage.push_front(c.matricula()); // si es first_fit guarda los elementos al principio de la lista para hacer un sistema LIFO
          break;
       }
       case LLIURE: {
-         this->waitingStorage.push_back(c.matricula());
+         this->waitingStorage.push_back(c.matricula()); // si es lliure guarda los elemento al final de la lista para hacer un sistema FIFO
          break;
       }
    }
    this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacioEspera));
 }
 
-// Mueve un contenedor del area de espera al principal
-void terminal::mover_espera_principal(const contenidor &c, list<string>::iterator& it) {
+bool terminal::mover_espera_principal(const contenidor &c, list<string>::iterator it) {
    ubicacio ub = ubicacioError;
 
    switch (this->estrategia_usada) {
@@ -334,23 +317,21 @@ void terminal::mover_espera_principal(const contenidor &c, list<string>::iterato
       this->waitingStorage.erase(it);
       // insertamos en contenedor principal
       insertar_contenedor_principal(c, ub);
-      it = this->waitingStorage.begin();
+      return true;
    }
    else {
-      ++it;
+      return false;
    }
    
 }
 
-// Mueve un contenedor de la zona principal a la zona de espera
 void terminal::mover_principal_espera(const contenidor &c) {
    if (this->elementos->existeix(c.matricula())) {
-      eliminar_contenedor_principal(c);
-      insertar_contenedor_espera(c);
+      eliminar_contenedor_principal(c); // eliminamos del contenedor principal
+      insertar_contenedor_espera(c); // insertamos en la zona de espera
    }
 }
 
-// Elimina el contenedor de la zona principal
 void terminal::retira_contenedor_principal(const string &m, bool elimina) {
    std::pair<contenidor, ubicacio> cont = (*elementos)[m];
 
@@ -358,8 +339,8 @@ void terminal::retira_contenedor_principal(const string &m, bool elimina) {
    while(i < cont.second.placa() + cont.first.longitud()/10) {
       int j = cont.second.pis()+1;
       while(j < this->pisos) {
-         if (this->principalStorage[cont.second.filera()][i][j] != "") {
-            retira_contenedor_principal(this->principalStorage[cont.second.filera()][i][j], false);
+         if (this->principalStorage[cont.second.filera()][i][j] != "") { // si encuentra un contenedor encima del que queremos sacar
+            retira_contenedor_principal(this->principalStorage[cont.second.filera()][i][j], false); // saca ese contenedor tambien
          }
          j++;
       }
@@ -374,40 +355,41 @@ void terminal::retira_contenedor_principal(const string &m, bool elimina) {
    }
 }
 
-// Elimina el contenedor de la zona de espera
 void terminal::retira_contenedor_espera(const contenidor &c) {
    this->elementos->elimina(c.matricula());
    this->waitingStorage.remove(c.matricula());
 }
 
-// Recoloca los contenedores de la espera al principal
 void terminal::recolocar_espera_en_principal() {
    list<string>::iterator it = this->waitingStorage.begin();
    while (it != this->waitingStorage.end()) {
       if (elementos->existeix(*it)) {
          std::pair<contenidor,ubicacio> cont = (*elementos)[*it];
-         mover_espera_principal(cont.first, it);
+         if (mover_espera_principal(cont.first, it)) { // si consigue mover el contenedor de la zona de espera a la zona principal
+            it = this->waitingStorage.begin(); // reinicia el iterador al principio de la lista
+         }
+         else {
+            ++it; // sino aumenta la posicion del iterador
+         }
       }
       else {
-         ++it;
+         ++it; // si no existe el elemento aumenta la posicion del iterador (esto no deberia pasar)
       }
    }
 }
 
-// Encuentra una posicion el el area principal para el contenedor con la estrategia first_fit
 ubicacio terminal::encontrarPosicionTerminal_firstfit(const contenidor &c) {
    for (int i = 0; i < this->fileres; i++) {
       for (int j = 0; j < this->places; j++) {
-         bool cabe = cabeContenedorUbi(c.longitud()/10, i, j);
+         bool cabe = cabeContenedorUbi(c.longitud()/10, i, j); // si cabe en la posicion
          if (cabe) {
-            return ubicacio(i, j, this->estadoPrincipal[i][j]);
+            return ubicacio(i, j, this->estadoPrincipal[i][j]); // devuelve la posicion
          }
       }
    }
-   return ubicacioError;
+   return ubicacioError; // si llega aqui es que no ha encontrado una ubicacion valida para el contenedor
 }
 
-// Encuentra una posicion en el area principal para el contenedor con la estrategia libre
 ubicacio terminal::encontrarPosicionTerminal_lliure(const contenidor &c) {
    for(int i = 0; i < this->pisos; i++) {
       for(int j = 0; j < this->fileres; j++) {
@@ -418,7 +400,7 @@ ubicacio terminal::encontrarPosicionTerminal_lliure(const contenidor &c) {
          }
       }
    }
-   return ubicacioError;
+   return ubicacioError; // si llega aqui es que no ha encontrado una ubicacion valida para el contenedor
 }
 
 bool terminal::cabeContenedorUbi(const int& size, const int& i, const int& j) {
@@ -435,15 +417,5 @@ bool terminal::cabeContenedorUbi(const int& size, const int& i, const int& j) {
    }
    else {
       return false;
-   }
-}
-
-void terminal::printMatrix() {
-   std::cout << "this->estadoPrincipal: " << std::endl;
-   for(int i = 0; i < this->fileres; i++) {
-      for(int j = 0; j < this->places; j++) {
-         std::cout << " " << this->estadoPrincipal[i][j];
-      }
-      std::cout << std::endl;
    }
 }

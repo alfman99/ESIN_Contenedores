@@ -1,33 +1,180 @@
 int fileres;
 int places;
 int pisos;
-
 nat moviments_grua;
-
 terminal::estrategia estrategia_usada;
 
+/*
+    Fileres, placas , pisos nos permitirá saber el tamaño de nuestra terminal.
+    Hemos utilizado un array 3d de strings para almacenar las matriculas en la zona
+    de guardado principal.
+
+    Nuestra manera de ver el proyecto era tener una estructura principal con la que 
+    pudiésemos ver y almacenar de una manera eficiente y sencilla y un catalogo donde guardaríamos los 
+    contenedores que contiene la terminal y sus ubicaciones. 
+    Antes de utilizar esta estructura planteamos alguna otra pero los costes de búsqueda en terminal eran mayores, 
+    con nuestra estructura, si quieres acceder a un contenedor, mirando su ubicación en catalogo conseguíamos un coste constante.
+    Para no tener que ir iterando los pisos a la hora de almacenar decidimos sacrificar un poco de memoria por mas 
+    rapidez de inserción utilizando una matriz (fileres * placas) en la cual guardaríamos las alturas actuales de nuestra terminal.
+
+    Al final del proyecto nos planteamos no usar la estructura principal y
+    organizar la terminal con únicamente el catalogo y la matriz de alturas pero no era asequible, 
+    ya que a la hora de retirar contenedores miramos de forma inmediata si hay contenedores por encima
+    con dicha estructura.
+
+    Para la zona de espera utilizamos una lista de la clase list para ahorrarnos usar memora dinámica.
+
+    Nuestra estrategia priorizaba los pisos antes que las plazas o las filas, por ello siempre que se pueda el contenedor
+    debía de ser colocado en el piso mas bajo, fila mas baja i plaza mas baja posible.
+    Con esta estrategia tenemos un ventaja y es que menos contenedores se colocan uno encima de otros y asi a la hora de
+    retirar un contenedor era mas probable que no hubiésemos de retirar contenedores que estuviesen por encima, operación que es
+    bastante costosa.
+*/
+
 string*** principalStorage;
+
+// estadoPrincipal es una matriz 2d que almacena la cantidad de contenedores que hay en una determinada
+// plaza y fila, gracias a esta estructura auxiliar nos permite encontrar posiciones libres 
+// en un tiempo O(fileres*places)
 int** estadoPrincipal;
+
+// lista donde almacenamos los contenedores en la zona de espera
 list<string> waitingStorage;
 
+// Catalogo que utilizamos para mantener constancia de donde están los contenedores en cada momento y si existen
+// ya que almacenamos un pair de contenedores y ubicaciones.
+// Tanto si están en la zona principal como si están en la zona de espera
+// Si retiramos un contendor lo eliminamos del catalogo.
 cataleg< std::pair<contenidor, ubicacio> >* elementos;
 
+
+
+// Inserta el contenedor en el area principal
+/*  PRE:    c != NULL
+            u != ubicacioError || u != ubicacioEspera
+    POST:   Contenedor c está ahora en la ubicación u
+            principalStorage[u.filera][i][u.pis] = c.matricula
+            estadoPrincipal[u.filera][i] += 1
+            <c, u> ahora existe en elementos
+            movimentsGrua++;
+    COSTE:  O(n) donde n es la longitud del contenedor
+*/
 void insertar_contenedor_principal(const contenidor &c, const ubicacio &u);
+
+
+
+// Elimina el contenedor del area principal
+/*  PRE:    c != NULL
+    POST:   Contenedor c no existe
+            principalStorage[u.filera][i][u.pis] = ""
+            estadoPrincipal[u.filera][i] -= 1
+            <c, u> ahora NO existe en elementos
+            movimentsGrua++;
+    COSTE:  O(n) donde n es la longitud del contenedor
+*/
 void eliminar_contenedor_principal(const contenidor &c);
 
+
+
+// Inserta un contenedor en la zona de espera
+/*  PRE:    c != NULL
+    POST:   Contenedor c está ahora en la zona de espera
+            si es FIRST_FIT el contenedor a la primera posicion de la lista
+            si es LLIURE el contenedor va a la ultima posicion en la lista
+            <c, ubicacioEspera> ahora existe en elementos
+    COSTE:  O(1)
+*/
 void insertar_contenedor_espera(const contenidor &c);
 
-void mover_espera_principal(const contenidor &c, list<string>::iterator& it);
+
+
+// Mueve un contenedor de la zona de espera a la zona principal
+/*  PRE:    c != NULL
+            ubicacion de c debe ser ubicacioEspera
+    POST:   <c, ubicacio> ahora existe en elementos
+            devuelve true si se ha movido un elemento de la zona de espera a la zona principal
+            devuelve false si no se ha conseguido mover el elemento a la zona principal
+    COSTE:  
+        FIRST_FIT: O(n) donde n = files * places
+        LLIURE: O(n) donde n = files * places * pisos
+*/
+bool mover_espera_principal(const contenidor &c, list<string>::iterator it);
+
+
+
+// Mueve un contenedor de la zona principal a la zona de espera
+/*  PRE:    c != NULL
+            ubicacion de c debe ser una ubicacion valida en la zona principal
+    POST:   <c, ubicacioEspera> ahora existe en elementos
+            principalStorage[u.filera][i][u.pis] = ""
+            estadoPrincipal[u.filera][i] -= 1
+    COSTE:  O(n) donde n es la longitud del contenedor
+*/
 void mover_principal_espera(const contenidor &c);
 
+
+
+// Retira a la zona de espera / elimina un contenedor en funcion del bool elimina
+/*  PRE:    m != ""
+    POST:   si elimina = true, el contenedor se elimina del sistema
+            si elimina = false, el contenedor se lleva a la zona de espera
+    COSTE:  
+*/
 void retira_contenedor_principal(const string &m, bool elimina);
+
+
+
+// Elimina un contenedor de la zona de espera
+/*  PRE:    c != NULL
+            ubicacio de c = ubicacioEspera
+    POST:   el contenedor es eliminado totalmente del sistema
+    COSTE:  O(1)
+*/
 void retira_contenedor_espera(const contenidor &c);
 
+
+
+// Recoloca los contenedores de la zona de espera en la zona principal
+/*  PRE:    TRUE
+    POST:   recorre todos los elementos de la zona de espera y
+            si un contenedor de la zona de espera se puede introducir en 
+            la zona principal se introducirá, no acaba hasta que ha intentado introducir
+            todos los contenedores en la zona de espera
+    COSTE:  
+*/
 void recolocar_espera_en_principal();
 
+
+
+// Encuentra una ubicacion para un contenedor con la estrategia FIRST_FIT
+/*  PRE:    c != NULL
+    POST:   devuelve una ubicacion valida para el contenedor priorizando
+            ubicaciones dentro de la zona principal, si no encuentra ninguna
+            ubicaion en la zona principal devolverá ubicacioError
+    COSTE:  O(n) donde n = filas * plaças
+*/
 ubicacio encontrarPosicionTerminal_firstfit(const contenidor &c);
+
+
+
+// Encuentra una ubicacion para un contenedor con la estrategia LLIURE
+/*  PRE:    c != NULL
+    POST:   devuelve una ubicacion valida para el contenedor priorizando
+            ubicaciones dentro de la zona principal, si no encuentra ninguna
+            ubicaion en la zona principal devolverá ubicacioError
+    COSTE:  O(n) donde n = filas * plaças * pisos
+*/
 ubicacio encontrarPosicionTerminal_lliure(const contenidor &c);
 
+
+
+// Determina si un contenedor de tamaño size cabe en la posicion i y j de la terminal principal
+/*  PRE:    size > 0
+            i > 0 && i < fileres
+            j > 0 && i < places
+    POST:   devuelve true si el contenedor de tamaño size cabe donde se le ha indicado,
+            devuelve false de lo contrario.
+    COSTE:  O(n) donde n es size
+*/
 bool cabeContenedorUbi(const int& size, const int& i, const int& j);
 
-void printMatrix();
