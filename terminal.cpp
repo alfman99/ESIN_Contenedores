@@ -109,17 +109,28 @@ void terminal::insereix_contenidor(const contenidor &c) throw(error){
    if (this->elementos->existeix(c.matricula())) {
       throw error(MatriculaDuplicada);
    }
+
+   ubicacio ub = ubicacioError;
+
    switch (this->estrategia_usada) {
    case FIRST_FIT: {
-      insereix_firstfit(c);
-      // printMatrix();
+      ub = encontrarPosicionTerminal_firstfit(c);
       break;
    }
    case LLIURE: {
-      insereix_lliure(c);
+      ub = encontrarPosicionTerminal_lliure(c);
       break;
    }
    }
+
+   if (ub != ubicacioError) {
+      insertar_contenedor_principal(c, ub);
+      recolocar_espera_en_principal();
+   }
+   else {
+      insertar_contenedor_espera(c);
+   }
+
 }
 
 void terminal::retira_contenidor(const string &m) throw(error){
@@ -253,21 +264,6 @@ terminal::estrategia terminal::quina_estrategia() const throw(){
    return estrategia_usada;
 }
 
-void terminal::insereix_firstfit(const contenidor &c) {
-   ubicacio ub = encontrarPosicionTerminal_firstfit(c);
-   if (ub != ubicacioError) {
-      insertar_contenedor_principal(c, ub);
-      recolocar_espera_en_principal();
-   }
-   else {
-      insertar_contenedor_espera(c);
-   }
-}
-
-void terminal::insereix_lliure(const contenidor &c) {
-   return;
-}
-
 // Inserta el contenedor en el area principal
 void terminal::insertar_contenedor_principal(const contenidor &c, const ubicacio &u) {
    if (this->elementos->existeix(c.matricula())) {
@@ -292,11 +288,9 @@ void terminal::eliminar_contenedor_principal(const contenidor &c) {
       }
       for (int i = ub.placa(); i < ub.placa() + c.longitud()/10; i++) {
          this->estadoPrincipal[ub.filera()][i] -= 1;
-         // std::cout << c.matricula() << " " << ub.filera() << " " << i << std::endl;
       }
       this->elementos->elimina(c.matricula());
       this->moviments_grua++;
-      // std::cout << "ESTOY EN eliminar_contenedor_principal" <<  std::endl;
    }
 }
 
@@ -307,20 +301,31 @@ void terminal::insertar_contenedor_espera(const contenidor &c) {
    }
    this->waitingStorage.push_front(c.matricula());
    this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacioEspera));
-   // std::cout << "ESTOY EN insertar_contenedor_espera" <<  std::endl;
 }
 
 // Mueve un contenedor del area de espera al principal
 void terminal::mover_espera_principal(const contenidor &c, list<string>::iterator& it) {
+   ubicacio ub = ubicacioError;
 
-   ubicacio ub = encontrarPosicionTerminal_firstfit(c);
+   switch (this->estrategia_usada) {
+      case FIRST_FIT: {
+         ub = encontrarPosicionTerminal_firstfit(c);
+         break;
+      }
+      case LLIURE: {
+         ub = encontrarPosicionTerminal_lliure(c);
+         break;
+      }
+   }
+
    if (ub != ubicacioError) {
       // lo eliminamos del catalogo (está en espera)
       elementos->elimina(c.matricula());
       // Lo eliminamos de la waitingStorage
-      it = this->waitingStorage.erase(it);
+      this->waitingStorage.erase(it);
       // insertamos en contenedor principal
       insertar_contenedor_principal(c, ub);
+      it = this->waitingStorage.begin();
    }
    else {
       ++it;
@@ -380,13 +385,27 @@ void terminal::recolocar_espera_en_principal() {
    }
 }
 
-// Encuentra una posicion el el area principal para el contenedor
+// Encuentra una posicion el el area principal para el contenedor con la estrategia first_fit
 ubicacio terminal::encontrarPosicionTerminal_firstfit(const contenidor &c) {
    for (int i = 0; i < this->fileres; i++) {
       for (int j = 0; j < this->places; j++) {
          bool cabe = cabeContenedorUbi(c.longitud()/10, i, j);
          if (cabe) {
             return ubicacio(i, j, this->estadoPrincipal[i][j]);
+         }
+      }
+   }
+   return ubicacioError;
+}
+
+// Encuentra una posicion en el area principal para el contenedor con la estrategia libre
+ubicacio terminal::encontrarPosicionTerminal_lliure(const contenidor &c) {
+   for(int i = 0; i < this->pisos; i++) {
+      for(int j = 0; j < this->fileres; j++) {
+         for(int k = 0; k < this->places; k++) {
+            if (this->estadoPrincipal[j][k] == i && cabeContenedorUbi(c.longitud()/10, j, k)) {
+               return ubicacio(j, k, i);
+            }
          }
       }
    }
