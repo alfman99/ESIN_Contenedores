@@ -4,6 +4,8 @@
 const ubicacio ubicacioError(-1, -1, -1);
 const ubicacio ubicacioEspera(-1, 0, 0);
 
+
+//Cost: O(n) donde n = filas*placas*pisos
 terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) {
    if (n == 0) {
       throw error(NumFileresIncorr);
@@ -49,10 +51,14 @@ terminal::terminal(nat n, nat m, nat h, estrategia st) throw(error) {
 
 }
 
+
+//Cost: O(n) donde n = filas*placas*pisos
 terminal::terminal(const terminal& b) throw(error) {
    *this = b;
 }
 
+
+//Cost: O(n) donde n = filas*placas*pisos
 terminal& terminal::operator=(const terminal& b) throw(error){
    if (this != &b) {
       this->fileres = b.fileres;
@@ -88,6 +94,7 @@ terminal& terminal::operator=(const terminal& b) throw(error){
    return *this;
 }
 
+//Cost: O(n) donde n = filas*placas
 terminal::~terminal() throw() {
 
    delete this->elementos;
@@ -107,6 +114,8 @@ terminal::~terminal() throw() {
 
 }
 
+
+//Cost: O(n) donde n = fila*placa*piso
 void terminal::insereix_contenidor(const contenidor &c) throw(error){
    if (this->elementos->existeix(c.matricula())) {
       throw error(MatriculaDuplicada);
@@ -138,6 +147,7 @@ void terminal::insereix_contenidor(const contenidor &c) throw(error){
 
 }
 
+
 void terminal::retira_contenidor(const string &m) throw(error){
    if (!elementos->existeix(m)) {
       throw error(MatriculaInexistent);
@@ -154,6 +164,7 @@ void terminal::retira_contenidor(const string &m) throw(error){
    }
 }
 
+//Cost: O(1)
 ubicacio terminal::on(const string &m) const throw(){
    if ((*elementos).existeix(m)) {
       return (*elementos)[m].second;
@@ -163,6 +174,7 @@ ubicacio terminal::on(const string &m) const throw(){
    }
 }
 
+//Cost: O(1)
 nat terminal::longitud(const string &m) const throw(error){
    if ((*elementos).existeix(m)) {
       return (*elementos)[m].first.longitud();
@@ -172,6 +184,8 @@ nat terminal::longitud(const string &m) const throw(error){
    }
 }
 
+
+//Cost: O(1)
 void terminal::contenidor_ocupa(const ubicacio &u, string &m) const throw(error){
    // Comprobamos que el contendedor esté en la zona principal (principalStorage)
    if (u.filera() >= 0 && u.placa() >= 0 && u.pis() >= 0 && u.filera() < this->fileres && u.placa() < this->places && u.pis() < this->pisos) {
@@ -181,6 +195,7 @@ void terminal::contenidor_ocupa(const ubicacio &u, string &m) const throw(error)
       throw error(UbicacioNoMagatzem);
    }   
 }  
+
 
 nat terminal::fragmentacio() const throw() {
    int contador = 0;
@@ -226,6 +241,8 @@ nat terminal::fragmentacio() const throw() {
    return contador;
 }
 
+
+//Cost: O(1)
 nat terminal::ops_grua() const throw(){
    return moviments_grua;
 }
@@ -235,21 +252,31 @@ void terminal::area_espera(list<string> &l) const throw(){
    l.sort();
 }
 
+
+//Cost: O(1)
 nat terminal::num_fileres() const throw(){
    return this->fileres;
 }
 
+
+//Cost: O(1)
 nat terminal::num_places() const throw(){
    return this->places;
 }
 
+
+//Cost: O(1)
 nat terminal::num_pisos() const throw(){
    return this->pisos;
 }
 
+
+//Cost: O(1)
 terminal::estrategia terminal::quina_estrategia() const throw(){
    return estrategia_usada;
 }
+
+
 
 void terminal::insertar_contenedor_principal(const contenidor &c, const ubicacio &u) {
    if (this->elementos->existeix(c.matricula())) {
@@ -265,6 +292,8 @@ void terminal::insertar_contenedor_principal(const contenidor &c, const ubicacio
    this->moviments_grua++;
 }
 
+
+
 void terminal::eliminar_contenedor_principal(const contenidor &c) {
    if (this->elementos->existeix(c.matricula())) {
       ubicacio ub = (*elementos)[c.matricula()].second;
@@ -278,6 +307,8 @@ void terminal::eliminar_contenedor_principal(const contenidor &c) {
       this->moviments_grua++;
    }
 }
+
+
 
 void terminal::insertar_contenedor_espera(const contenidor &c) {
    if (this->elementos->existeix(c.matricula())) {
@@ -295,6 +326,8 @@ void terminal::insertar_contenedor_espera(const contenidor &c) {
    }
    this->elementos->assig(c.matricula(), std::pair<contenidor,ubicacio>(c, ubicacioEspera));
 }
+
+
 
 bool terminal::mover_espera_principal(const contenidor &c, list<string>::iterator it) {
    ubicacio ub = ubicacioError;
@@ -325,6 +358,8 @@ bool terminal::mover_espera_principal(const contenidor &c, list<string>::iterato
    
 }
 
+
+
 void terminal::mover_principal_espera(const contenidor &c) {
    if (this->elementos->existeix(c.matricula())) {
       eliminar_contenedor_principal(c); // eliminamos del contenedor principal
@@ -332,6 +367,8 @@ void terminal::mover_principal_espera(const contenidor &c) {
    }
 }
 
+
+//Cost: O()
 void terminal::retira_contenedor_principal(const string &m, bool elimina) {
    std::pair<contenidor, ubicacio> cont = (*elementos)[m];
 
@@ -355,10 +392,14 @@ void terminal::retira_contenedor_principal(const string &m, bool elimina) {
    }
 }
 
+
+
 void terminal::retira_contenedor_espera(const contenidor &c) {
    this->elementos->elimina(c.matricula());
    this->waitingStorage.remove(c.matricula());
 }
+
+
 
 void terminal::recolocar_espera_en_principal() {
    list<string>::iterator it = this->waitingStorage.begin();
@@ -378,6 +419,8 @@ void terminal::recolocar_espera_en_principal() {
    }
 }
 
+
+
 ubicacio terminal::encontrarPosicionTerminal_firstfit(const contenidor &c) {
    for (int i = 0; i < this->fileres; i++) {
       for (int j = 0; j < this->places; j++) {
@@ -389,6 +432,8 @@ ubicacio terminal::encontrarPosicionTerminal_firstfit(const contenidor &c) {
    }
    return ubicacioError; // si llega aqui es que no ha encontrado una ubicacion valida para el contenedor
 }
+
+
 
 ubicacio terminal::encontrarPosicionTerminal_lliure(const contenidor &c) {
    for(int i = 0; i < this->pisos; i++) {
@@ -402,6 +447,8 @@ ubicacio terminal::encontrarPosicionTerminal_lliure(const contenidor &c) {
    }
    return ubicacioError; // si llega aqui es que no ha encontrado una ubicacion valida para el contenedor
 }
+
+
 
 bool terminal::cabeContenedorUbi(const int& size, const int& i, const int& j) {
    int posIni = this->estadoPrincipal[i][j];
