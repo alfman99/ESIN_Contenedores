@@ -4,6 +4,7 @@
 ##!
 ##! Memoria general
 set_memory 100000 1000000000
+start_t
 ##!
 ##!
 ##!
@@ -40,4 +41,5 @@ load jp_public_terminal.in
 ##!
 ##!
 ##!
+stop_t
 exit

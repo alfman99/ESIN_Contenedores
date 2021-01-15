@@ -119,7 +119,7 @@ void mover_principal_espera(const contenidor &c);
 /*  PRE:    m != ""
     POST:   si elimina = true, el contenedor se elimina del sistema
             si elimina = false, el contenedor se lleva a la zona de espera
-    COSTE:  
+    COSTE:  O(n²) donde n = altura de la terminal
 */
 void retira_contenedor_principal(const string &m, bool elimina);
 
