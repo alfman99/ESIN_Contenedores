@@ -1,9 +1,3 @@
-int fileres;
-int places;
-int pisos;
-nat moviments_grua;
-terminal::estrategia estrategia_usada;
-
 /*
     Fileres, placas , pisos nos permitirá saber el tamaño de nuestra terminal.
     Hemos utilizado un array 3d de strings para almacenar las matriculas en la zona
@@ -30,6 +24,13 @@ terminal::estrategia estrategia_usada;
     retirar un contenedor era mas probable que no hubiésemos de retirar contenedores que estuviesen por encima, operación que es
     bastante costosa.
 */
+int fileres;
+int places;
+int pisos;
+nat moviments_grua;
+terminal::estrategia estrategia_usada;
+
+
 
 string*** principalStorage;
 

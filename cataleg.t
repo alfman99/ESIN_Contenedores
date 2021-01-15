@@ -1,6 +1,8 @@
 #include "cataleg.hpp"
 #include <esin/util>
 
+
+//Coste: O(n) donde n = numelems
 /* Constructora. Crea un catàleg buit on numelems és el nombre
     aproximat d'elements que com a màxim s'inseriran al catàleg. */
 template<typename Valor>
@@ -13,6 +15,7 @@ cataleg<Valor>::cataleg(nat numelems) throw(error) : _quants(0) {
     }
 }
 
+//Coste: O(n) donde n = c._M
 /* Constructora per còpia, assignació i destructora. */
 template<typename Valor>
 cataleg<Valor>::cataleg(const cataleg& c) throw(error) {
@@ -44,6 +47,7 @@ cataleg<Valor>::cataleg(const cataleg& c) throw(error) {
 
 }
 
+//Coste: O(n) donde n = c._M
 template<typename Valor>
 cataleg<Valor>& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
     if(this != &c){
@@ -52,6 +56,7 @@ cataleg<Valor>& cataleg<Valor>::operator=(const cataleg& c) throw(error) {
     return *this;
 }
 
+//Coste: O(n) donde n = c._M
 template<typename Valor>
 cataleg<Valor>::~cataleg() throw() {
     node_hash* actual;
@@ -68,6 +73,7 @@ cataleg<Valor>::~cataleg() throw() {
     delete[] this->_taula;
 }
 
+//Coste: O(1)
 /* Mètode modificador. Insereix el parell <clau, valor> indicat.
     En cas que la clau k ja existeixi en el catàleg actualitza el valor
     associat. Genera un error en cas que la clau sigui l'string buit. */
@@ -103,6 +109,7 @@ void cataleg<Valor>::assig(const string &k, const Valor &v) throw(error) {
     }
 }
 
+//Coste: O(1)
 /* Elimina del catàleg el parell que té com a clau k.
     En cas que la clau k no existeixi en el catàleg genera un error. */
 template<typename Valor>
@@ -145,6 +152,7 @@ void cataleg<Valor>::elimina(const string &k) throw(error) {
     }
 }
 
+//Coste: O(1)
 /* Retorna true si i només si la clau k existeix dins del catàleg; false
     en cas contrari. */
 template<typename Valor>
@@ -178,6 +186,7 @@ bool cataleg<Valor>::existeix(const string &k) const throw() {
     return false;
 }
 
+//Coste: O(1)
 /* Retorna el valor associat a la clau k; si no existeix cap parell amb
     clau k llavors genera un error. Exemple:
     cataleg<int> ct;
@@ -206,6 +215,7 @@ Valor cataleg<Valor>::operator[](const string &k) const throw(error) {
     throw error(ClauInexistent);
 }
 
+//Coste: O(1)
 /* Retorna el nombre d'elements que s'han inserit en el catàleg
     fins aquest moment. */
 template<typename Valor>
@@ -213,6 +223,7 @@ nat cataleg<Valor>::quants() const throw() {
     return this->_quants;
 }
 
+//Coste: O(n) donde n = numero/2
 template<typename Valor>
 bool cataleg<Valor>::esPrimo(unsigned int numero) throw() {
     if (numero == 0 || numero == 1) {
@@ -228,6 +239,7 @@ bool cataleg<Valor>::esPrimo(unsigned int numero) throw() {
     return true;
 }
 
+//Coste: O(n) lineal hasta el siguiente numero primo 
 template<typename Valor>
 nat cataleg<Valor>::nextPrime(nat num) throw() {
     nat aux = num;

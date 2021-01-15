@@ -1,4 +1,10 @@
-
+/*
+Al principio pensamos en implementar cataleg con un bst ya que nos parecia lo mas sencillo
+pero los costes tanto de insertar, retirar como consultar tienen un coste de O(log n) 
+por lo que indagamos un poco mas y acabamos utilizando una tabla de hash de sinonimos encadenados indirectos 
+ya que no requería de redispersion (y si pones un numero primo como tamaño de la tabla hace muy buena dispersion) 
+y los costes tanto de insertar como consultar como eliminar son constantes y es algo que ibamos a estar haciendo mucho por lo que merecía la pena.
+*/
 struct node_hash {
     string _k;
     Valor _v;
@@ -10,5 +16,14 @@ node_hash** _taula;
 nat _M;
 nat _quants;
 
+/*
+Pre: numero >= 0
+Post: si numero es Primo devuelve True sino devuelve False
+*/
 bool esPrimo(unsigned int numero) throw();
+
+/*
+Pre: num >= 0
+Post: Devuelve el primer primo mayor a num
+*/
 unsigned int nextPrime(unsigned int num) throw();

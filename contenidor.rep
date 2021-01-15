@@ -1,4 +1,8 @@
 string matri;   //matri conte la matricula del nostre contenidor
 nat longi;      //longi conte la longitud del nostre contenidor 
 
+/* 
+Pre: True
+Post: devuelve True si hay un error en la matricula y False si laa matricula està bien formada
+*/
 bool errorMatricula (const string &matricula);
