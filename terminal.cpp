@@ -251,6 +251,10 @@ nat terminal::ops_grua() const throw(){
 // Cost: O(n log n)
 void terminal::area_espera(list<string> &l) const throw(){
    l = this->waitingStorage;
+   /*
+      porfavor mirar ultimas lineas comentadas de terminal.rep sobre nuestra implementacion
+      del mergesort.
+   */
    l.sort();
 }
 
@@ -464,3 +468,75 @@ bool terminal::cabeContenedorUbi(const int& size, const int& i, const int& j) {
       return false;
    }
 }
+
+/*
+std::pair <list<string>,list<string> > terminal::partir(int n, list<string> L1) const {
+   list<string>::iterator it1 = L1.begin();
+   list<string> lista2;
+   list<string> lista1;
+   int m = 0;
+   
+   while(m < n){
+      lista1.push_back(*it1);
+      it1++;
+      ++m;
+   }
+
+   while(m < L1.size()){
+      lista2.push_back(*it1);
+      it1++;
+      ++m;
+	}
+	
+	std::pair <list<string>,list<string> > listas = make_pair(lista1,lista2);
+	return listas;
+}
+
+
+list<string> fusionar(list<string> lista1 ,list<string> lista2){
+    list<string> lista_juntada;
+    
+    while (!lista1.empty() || !lista2.empty()) {
+        if(lista1.empty()){
+            lista_juntada.push_back(lista2.front());
+            lista2.pop_front();
+        }
+        else if(lista2.empty()){
+            lista_juntada.push_back(lista1.front());
+            lista1.pop_front();
+        }
+        else{
+            if (lista1.front() > lista2.front()) {
+                lista_juntada.push_back(lista2.front());
+                lista2.pop_front();
+            }
+            else{
+                lista_juntada.push_back(lista1.front());
+                lista1.pop_front();
+            }
+        }
+    }
+    
+    return lista_juntada;
+}
+
+list<string> terminal::mergeSort(int n, list<string> L1) const {
+    list<string> lista2;
+    list<string> lista1;
+    std::pair <list<string>,list<string> > listas;
+
+    if(n > 1){
+        int m = n/2;
+        listas = partir(m, L1);
+        lista1=listas.first;
+        lista2=listas.second;
+        if(lista1.size()>1)
+            lista1=mergeSort(m,lista1);
+        if(lista2.size()>1)
+            lista2=mergeSort(n-m,lista2);
+        
+        L1 = fusionar(lista1,lista2);
+    }
+    return L1;
+}
+*/

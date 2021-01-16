@@ -179,3 +179,22 @@ ubicacio encontrarPosicionTerminal_lliure(const contenidor &c);
 */
 bool cabeContenedorUbi(const int& size, const int& i, const int& j);
 
+
+
+
+
+
+
+/*
+
+   No podemos añadir metodos privados constantes, da error.
+   Si pudiesemos acceder al .hpp y ponerlo ahi el sort funcionaria
+   Es necesario que los metodos sean constantes porque se llaman desde una
+   funcion constante (area_espera). Asi que lo ponemos aqui comentado
+   para que quede constancia de que hicimos el metodo mergeSort para
+   sustituir el metodo de la clase .sort()
+
+std::pair <list<string>,list<string> > partir(int n, list<string> L1) const;
+list<string> fusionar(list<string> lista1 ,list<string> lista2) const;
+list<string> mergeSort(int n, list<string> L1) const;
+*/
